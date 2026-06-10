@@ -18,14 +18,9 @@
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
 
-/* ── LAYOUT SWITCH ── */
 #landingView{display:block}
 #appView{display:none}
 
-/* ════════════════════════════════
-   LANDING PAGE
-════════════════════════════════ */
-/* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:300;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:rgba(7,7,13,0.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px}
 .logo-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:glow 2s infinite}
@@ -38,7 +33,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 .nbtn-fill{background:var(--accent);color:#fff}
 .nbtn-fill:hover{background:var(--accent2)}
 
-/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 5% 60px;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(124,92,252,.08) 0%,transparent 70%)}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(124,92,252,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(124,92,252,.025) 1px,transparent 1px);background-size:52px 52px}
@@ -55,14 +49,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);ove
 .btn-s{background:transparent;color:var(--text);border:1px solid var(--border2);padding:14px 28px;border-radius:11px;font-size:.92rem;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s;font-family:'DM Sans',sans-serif;text-decoration:none}
 .btn-s:hover{border-color:var(--accent);color:var(--accent)}
 
-/* STATS */
 .stats{display:flex;margin-top:3.5rem;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;max-width:680px;width:100%;position:relative}
 .stat{flex:1;padding:1.1rem .8rem;text-align:center;border-right:1px solid var(--border)}
 .stat:last-child{border-right:none}
 .sn{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:var(--green);display:block}
 .sl{font-size:.7rem;color:var(--text3);margin-top:2px}
 
-/* SECTIONS */
 section.lsec{padding:80px 5%}
 .sec-alt{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .slabel{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:600;margin-bottom:.5rem}
@@ -71,7 +63,6 @@ section.lsec{padding:80px 5%}
 .center{text-align:center}.center .ssub{margin:0 auto}
 .mw{max-width:960px;margin:0 auto}
 
-/* HOW IT WORKS */
 .how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:2.5rem}
 .how-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.4rem;position:relative;overflow:hidden}
 .how-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
@@ -80,7 +71,6 @@ section.lsec{padding:80px 5%}
 .how-card h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.35rem}
 .how-card p{font-size:.8rem;color:var(--text2);line-height:1.6}
 
-/* SERVICES PREVIEW */
 .svc-preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.8rem;margin-top:2rem}
 .svc-prev{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:1.1rem .8rem;text-align:center;transition:all .2s;cursor:pointer}
 .svc-prev:hover{border-color:rgba(124,92,252,.4);transform:translateY(-2px)}
@@ -89,25 +79,22 @@ section.lsec{padding:80px 5%}
 .svc-prev-price{font-size:.8rem;font-weight:700;color:var(--green)}
 .svc-prev-price.loading{color:var(--text3);font-size:.7rem}
 
-/* PAYMENT SECTION */
 .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:420px;margin:1.5rem auto 0}
 .pay-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.4rem;text-align:center}
 .pay-icon{font-size:2rem;margin-bottom:.5rem}
-.pay-name{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}
+.pay-name{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing--.08em;margin-bottom:.25rem}
 .pay-val{font-size:.95rem;font-weight:700}
 .crypto-card{background:linear-gradient(135deg,rgba(240,185,11,.06),rgba(240,185,11,.02));border:1px solid rgba(240,185,11,.15);border-radius:13px;padding:1.4rem;text-align:center;max-width:420px;margin:1rem auto 0}
 .crypto-icon{font-size:2rem;margin-bottom:.5rem}
 .crypto-name{font-size:.72rem;color:rgba(240,185,11,.7);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem}
 .crypto-val{font-size:.92rem;font-weight:700;color:#f0b90b}
 
-/* FEATURES */
 .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:2.5rem}
 .feat{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.3rem}
 .feat-icon{width:38px;height:38px;background:var(--adim2);border:1px solid rgba(124,92,252,.12);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.9rem}
 .feat h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.35rem}
 .feat p{font-size:.8rem;color:var(--text2);line-height:1.6}
 
-/* SUPPORT FLOAT BUTTONS */
 .support-float{position:fixed;bottom:24px;right:24px;z-index:400;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
 .support-btn{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 4px 20px rgba(0,0,0,.4);transition:transform .2s}
 .support-btn:hover{transform:scale(1.1)}
@@ -115,18 +102,11 @@ section.lsec{padding:80px 5%}
 .tg-btn{background:#229ed9}
 .support-label{font-size:.65rem;color:var(--text3);text-align:right;margin-bottom:-6px}
 
-/* FOOTER */
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem 5%;text-align:center}
 footer p{font-size:.78rem;color:var(--text3)}
 footer a{color:var(--accent);text-decoration:none}
 
-
-/* ════════════════════════════════
-   APP (DASHBOARD)
-════════════════════════════════ */
 .app-layout{display:flex;min-height:100vh}
-
-/* SIDEBAR */
 .app-sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:1.2rem .8rem;position:fixed;top:0;bottom:0;left:0;z-index:100;transition:transform .3s}
 .sidebar-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--text);padding:.5rem .7rem 1.2rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);margin-bottom:.8rem}
 .sidebar-logo em{color:var(--accent);font-style:normal}
@@ -137,19 +117,16 @@ footer a{color:var(--accent);text-decoration:none}
 .sn-item .icon{font-size:1rem;width:20px;text-align:center}
 .sidebar-bottom{margin-top:auto;padding-top:1rem;border-top:1px solid var(--border)}
 
-/* USER CHIP in sidebar */
 .user-chip{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.8rem;margin-bottom:.8rem}
 .user-chip-name{font-size:.85rem;font-weight:600;margin-bottom:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .user-chip-email{font-size:.72rem;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.5rem}
 .user-chip-bal{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:var(--green)}
 .user-chip-bal-lbl{font-size:.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}
 
-/* MAIN CONTENT */
 .app-main{margin-left:240px;flex:1;padding:2rem;min-height:100vh}
 .app-page{display:none}.app-page.on{display:block}
 .app-page-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem}
 
-/* DASHBOARD CARDS */
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
 .dash-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.2rem}
 .dc-label{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem}
@@ -158,7 +135,6 @@ footer a{color:var(--accent);text-decoration:none}
 .dc-val.purple{color:var(--accent)}
 .dc-val.yellow{color:var(--yellow)}
 
-/* SERVICE GRID in app */
 .app-svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.8rem}
 .app-svc-card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:1rem .8rem;text-align:center;cursor:pointer;transition:all .2s;position:relative}
 .app-svc-card:hover{border-color:rgba(124,92,252,.4);transform:translateY(-1px)}
@@ -169,7 +145,6 @@ footer a{color:var(--accent);text-decoration:none}
 .asc-price{font-size:.82rem;font-weight:700;color:var(--green)}
 .asc-badge{position:absolute;top:5px;right:5px;font-size:.58rem;padding:2px 5px;border-radius:4px;background:rgba(0,229,160,.12);color:var(--green)}
 
-/* ORDER PANEL */
 .order-panel{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:1.5rem}
 .op-head{padding:1rem 1.3rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .op-head h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700}
@@ -179,13 +154,11 @@ footer a{color:var(--accent);text-decoration:none}
 .sdot.on{background:var(--accent)}
 .opane{display:none}.opane.on{display:block}
 
-/* NUM BOX */
 .num-box{background:var(--bg3);border:1px solid rgba(0,229,160,.2);border-radius:10px;padding:.9rem 1.1rem;margin-bottom:.9rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
 .num-val{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:.04em}
 .copy-btn{background:var(--gdim);border:1px solid rgba(0,229,160,.2);border-radius:7px;padding:6px 12px;color:var(--green);font-size:.74rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
 .copy-btn:hover{background:rgba(0,229,160,.18)}
 
-/* OTP */
 .spinner{width:30px;height:30px;border:2.5px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto .7rem}
 @keyframes spin{to{transform:rotate(360deg)}}
 .otp-box{background:linear-gradient(135deg,rgba(0,229,160,.07),rgba(0,229,160,.02));border:1px solid rgba(0,229,160,.25);border-radius:12px;padding:1.2rem;text-align:center;margin-bottom:.9rem}
@@ -193,7 +166,6 @@ footer a{color:var(--accent);text-decoration:none}
 .timer-bar{height:3px;background:var(--border2);border-radius:2px;margin:.3rem 0 .2rem;overflow:hidden}
 .timer-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1s linear}
 
-/* ORDERS TABLE */
 .otable-wrap{background:var(--card);border:1px solid var(--border);border-radius:13px;overflow:hidden}
 .otable-head{padding:.9rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .otable-head h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700}
@@ -202,13 +174,7 @@ footer a{color:var(--accent);text-decoration:none}
 .tbl td{padding:10px 12px;font-size:.82rem;border-bottom:1px solid rgba(255,255,255,.03)}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr:hover td{background:rgba(255,255,255,.015)}
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:100px;font-size:.68rem;font-weight:600}
-.b-green{background:rgba(0,229,160,.12);color:var(--green)}
-.b-yellow{background:rgba(255,209,102,.12);color:var(--yellow)}
-.b-red{background:rgba(255,77,109,.12);color:var(--red)}
-.b-purple{background:var(--adim);color:var(--accent)}
 
-/* TOPUP */
 .topup-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
 .topup-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.3rem;text-align:center;cursor:pointer;transition:all .2s}
 .topup-card:hover{border-color:var(--accent)}
@@ -221,7 +187,6 @@ footer a{color:var(--accent);text-decoration:none}
 .amt-btn:hover{border-color:var(--accent);color:var(--accent)}
 .amt-btn.selected{border-color:var(--accent);background:var(--adim);color:var(--accent)}
 
-/* FORMS */
 .fgroup{margin-bottom:.85rem}
 .flabel{display:block;font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
 .finput{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:11px 14px;color:var(--text);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
@@ -233,11 +198,9 @@ footer a{color:var(--accent);text-decoration:none}
 .fbtn-g:hover:not(:disabled){background:#00c488}
 .fbtn-out{background:transparent;border:1px solid rgba(124,92,252,.3);color:var(--accent)}
 .fbtn-out:hover:not(:disabled){background:var(--adim)}
-.fbtn-sm{padding:9px 16px;font-size:.8rem;width:auto}
 .smsg{font-size:.78rem;margin-top:.4rem;min-height:15px}
 .smsg.ok{color:var(--green)}.smsg.err{color:var(--red)}.smsg.info{color:var(--text2)}
 
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:500;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
 .modal-overlay.open{display:flex}
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;width:100%;max-width:420px;max-height:92vh;overflow-y:auto}
@@ -250,7 +213,6 @@ footer a{color:var(--accent);text-decoration:none}
 .tab{flex:1;padding:9px;border-radius:8px;font-size:.82rem;font-weight:500;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text2);transition:all .2s;font-family:'DM Sans',sans-serif}
 .tab.active{background:var(--adim);border-color:var(--accent);color:var(--accent)}
 
-/* MOBILE */
 .mob-menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;padding:4px}
 @media(max-width:768px){
   .stats{flex-wrap:wrap}
@@ -261,20 +223,16 @@ footer a{color:var(--accent);text-decoration:none}
   .mob-menu-btn{display:flex}
   .topup-grid{grid-template-columns:1fr 1fr}
   .amount-grid{grid-template-columns:repeat(3,1fr)}
-  .nav-logo-text{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- ════════════════ LANDING PAGE ════════════════ -->
 <div id="landingView">
-
-<!-- NAV -->
 <nav class="nav">
   <a href="#" class="nav-logo">
     <div class="logo-dot"></div>
-    <span class="nav-logo-text">USA<em>Verify</em></span>
+    <span>USA<em>Verify</em></span>
   </a>
   <div class="nav-right">
     <button class="nbtn nbtn-ghost" onclick="openAuth('login')">Login</button>
@@ -282,7 +240,6 @@ footer a{color:var(--accent);text-decoration:none}
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -301,7 +258,6 @@ footer a{color:var(--accent);text-decoration:none}
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section class="lsec" id="how">
   <div class="mw center">
     <div class="slabel">How it works</div>
@@ -331,14 +287,12 @@ footer a{color:var(--accent);text-decoration:none}
   </div>
 </section>
 
-<!-- LIVE SERVICES PREVIEW -->
 <section class="lsec sec-alt" id="services">
   <div class="mw center">
     <div class="slabel">Services</div>
     <h2 class="stitle">300+ platforms supported</h2>
     <p class="ssub center">Live prices in Naira ₦ — updated in real time from market rates.</p>
     <div class="svc-preview-grid" id="svcPreviewGrid">
-      <!-- loaded by JS -->
       <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text3)">
         <div class="spinner" style="margin:0 auto .5rem"></div>Loading live prices...
       </div>
@@ -347,14 +301,12 @@ footer a{color:var(--accent);text-decoration:none}
   </div>
 </section>
 
-<!-- PAYMENT OPTIONS -->
 <section class="lsec" id="payment">
   <div class="mw center">
     <div class="slabel">Payment</div>
     <h2 class="stitle">Easy topup options</h2>
     <p class="ssub center">Pay securely and get balance added instantly or within minutes.</p>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:460px;margin:1.5rem auto 0">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:420px;margin:1.5rem auto 0">
       <div class="pay-card">
         <div class="pay-icon">💬</div>
         <div class="pay-name">WhatsApp</div>
@@ -366,7 +318,7 @@ footer a{color:var(--accent);text-decoration:none}
         <div class="pay-val" id="landTg" style="font-size:.82rem;color:var(--text2)">Loading...</div>
       </div>
     </div>
-    <div class="crypto-card" style="max-width:460px">
+    <div class="crypto-card" style="max-width:420px">
       <div class="crypto-icon">₿</div>
       <div class="crypto-name">Binance Pay — Crypto</div>
       <div class="crypto-val">USDT / BNB / BTC accepted</div>
@@ -375,1014 +327,358 @@ footer a{color:var(--accent);text-decoration:none}
   </div>
 </section>
 
-<!-- FEATURES -->
-<section class="lsec sec-alt">
-  <div class="mw center">
-    <div class="slabel">Why USAVerify</div>
-    <h2 class="stitle">Built for Nigerians</h2>
-    <div class="feat-grid">
-      <div class="feat">
-        <div class="feat-icon">🇳🇬</div>
-        <h3>Prices in Naira ₦</h3>
-        <p>All prices shown and charged in NGN with live exchange rates. No USD confusion.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">📱</div>
-        <h3>Real Non-VoIP Numbers</h3>
-        <p>Genuine US T-Mobile, AT&T numbers — not VoIP. Works where VoIP is rejected.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">⚡</div>
-        <h3>Auto SMS Detection</h3>
-        <p>No manual refresh. Code detected and shown automatically within seconds.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">💰</div>
-        <h3>Pay Only on Success</h3>
-        <p>No SMS received? You get a full refund. No risk to your balance.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">₿</div>
-        <h3>Crypto Payment</h3>
-        <p>Top up with USDT, BNB or BTC via Binance Pay — instant balance credit.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-icon">🛡️</div>
-        <h3>24/7 Support</h3>
-        <p>WhatsApp and Telegram support available. Fast response, always online.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="lsec" style="text-align:center;padding:90px 5%;position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;background:radial-gradient(circle,rgba(124,92,252,.07) 0%,transparent 70%)"></div>
-  <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;margin-bottom:1rem;position:relative">Ready to get verified?</h2>
-  <p style="color:var(--text2);max-width:380px;margin:0 auto 2rem;position:relative">Join thousands of Nigerians using USAVerify for fast, reliable SMS verification.</p>
-  <button class="btn-p" onclick="openAuth('register')" style="margin:0 auto;display:inline-flex;position:relative">Create Free Account</button>
-</section>
-
-<!-- FOOTER -->
 <footer>
   <p style="margin-bottom:.4rem">USAVerify — Real US Numbers · Prices in NGN ₦</p>
   <p>Powered by <a href="https://daisysms.io" target="_blank">DaisySMS</a> · Support: <a href="#" id="footerWa">WhatsApp</a> · <a href="#" id="footerTg">Telegram</a></p>
 </footer>
+</div>
 
-</div><!-- /landingView -->
-
-
-<!-- ════════════════ APP VIEW ════════════════ -->
 <div id="appView">
 <div class="app-layout">
-
-  <!-- SIDEBAR -->
   <div class="app-sidebar" id="appSidebar">
-    <div class="sidebar-logo">
-      <div class="logo-dot"></div>
-      USA<em>Verify</em>
-    </div>
-
-    <!-- User chip -->
+    <div class="sidebar-logo"><div class="logo-dot"></div>USA<em>Verify</em></div>
     <div class="user-chip">
       <div class="user-chip-name" id="sidebarName">–</div>
       <div class="user-chip-email" id="sidebarEmail">–</div>
       <div class="user-chip-bal-lbl">Balance</div>
       <div class="user-chip-bal" id="sidebarBal">₦0</div>
     </div>
-
-    <button class="sn-item active" onclick="showAppPage('dashboard')" id="nav-dashboard">
-      <span class="icon">📊</span> Dashboard
-    </button>
-    <button class="sn-item" onclick="showAppPage('verify')" id="nav-verify">
-      <span class="icon">📱</span> Get Number
-    </button>
-    <button class="sn-item" onclick="showAppPage('orders')" id="nav-orders">
-      <span class="icon">📋</span> My Orders
-    </button>
-    <button class="sn-item" onclick="showAppPage('topup')" id="nav-topup">
-      <span class="icon">💰</span> Add Balance
-    </button>
-    <button class="sn-item" onclick="showAppPage('support')" id="nav-support">
-      <span class="icon">💬</span> Support
-    </button>
-
+    <button class="sn-item active" onclick="showAppPage('dashboard')" id="nav-dashboard"><span class="icon">📊</span> Dashboard</button>
+    <button class="sn-item" onclick="showAppPage('verify')" id="nav-verify"><span class="icon">📱</span> Get Number</button>
+    <button class="sn-item" onclick="showAppPage('orders')" id="nav-orders"><span class="icon">📋</span> My Orders</button>
+    <button class="sn-item" onclick="showAppPage('topup')" id="nav-topup"><span class="icon">💰</span> Add Balance</button>
+    <button class="sn-item" onclick="showAppPage('support')" id="nav-support"><span class="icon">💬</span> Support</button>
     <div class="sidebar-bottom">
-      <button class="sn-item" onclick="doLogout()" style="color:var(--red)">
-        <span class="icon">🚪</span> Logout
-      </button>
+      <button class="sn-item" onclick="doLogout()" style="color:var(--red)"><span class="icon">🚪</span> Logout</button>
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="app-main">
-
-    <!-- Mobile top bar -->
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)">
       <button class="mob-menu-btn" onclick="toggleMobSidebar()">☰</button>
       <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem" id="appTopTitle">Dashboard</div>
       <div style="font-size:.8rem;color:var(--green);font-weight:600" id="appTopBal">₦0</div>
     </div>
 
-    <!-- ── DASHBOARD ── -->
     <div class="app-page on" id="ap-dashboard">
       <div class="app-page-title">📊 Dashboard</div>
       <div class="dash-grid">
-        <div class="dash-card">
-          <div class="dc-label">Balance</div>
-          <div class="dc-val green" id="dbBal">₦0</div>
-        </div>
-        <div class="dash-card">
-          <div class="dc-label">Total Orders</div>
-          <div class="dc-val purple" id="dbOrders">0</div>
-        </div>
-        <div class="dash-card">
-          <div class="dc-label">Completed</div>
-          <div class="dc-val green" id="dbDone">0</div>
-        </div>
-        <div class="dash-card">
-          <div class="dc-label">Total Spent</div>
-          <div class="dc-val yellow" id="dbSpent">₦0</div>
-        </div>
+        <div class="dash-card"><div class="dc-label">Balance</div><div class="dc-val green" id="dbBal">₦0</div></div>
+        <div class="dash-card"><div class="dc-label">Total Orders</div><div class="dc-val purple" id="dbOrders">0</div></div>
+        <div class="dash-card"><div class="dc-label">Completed</div><div class="dc-val green" id="dbDone">0</div></div>
+        <div class="dash-card"><div class="dc-label">Total Spent</div><div class="dc-val yellow" id="dbSpent">₦0</div></div>
       </div>
-
       <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2rem">
         <button class="fbtn fbtn-g" style="width:auto;padding:11px 20px" onclick="showAppPage('verify')">⚡ Get a Number</button>
         <button class="fbtn fbtn-out" style="width:auto;padding:11px 20px" onclick="showAppPage('topup')">💰 Add Balance</button>
       </div>
-
-      <!-- Recent orders -->
       <div class="otable-wrap">
-        <div class="otable-head">
-          <h3>Recent Orders</h3>
-          <button class="copy-btn" onclick="loadUserData()">↻ Refresh</button>
-        </div>
+        <div class="otable-head"><h3>Recent Orders</h3><button class="copy-btn" onclick="loadUserData()">↻ Refresh</button></div>
         <div style="overflow-x:auto">
           <table class="tbl">
-            <thead><tr>
-              <th>Service</th><th>Number</th><th>Code</th><th>Price</th><th>Status</th>
-            </tr></thead>
-            <tbody id="dashOrdersBody">
-              <tr><td colspan="5" style="text-align:center;color:var(--text3);padding:2rem">No orders yet</td></tr>
-            </tbody>
+            <thead><tr><th>Service</th><th>Number</th><th>Code</th><th>Price</th><th>Status</th></tr></thead>
+            <tbody id="dashOrdersBody"><tr><td colspan="5" style="text-align:center;color:var(--text3);padding:2rem">No orders yet</td></tr></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- ── GET NUMBER ── -->
     <div class="app-page" id="ap-verify">
       <div class="app-page-title">📱 Get a US Number</div>
-
       <div style="margin-bottom:1.2rem">
         <div class="slabel">Select Service</div>
         <p style="font-size:.8rem;color:var(--text2);margin-top:.2rem">Click a service to start. Price deducted from balance.</p>
+        <input type="text" id="svcSearch" class="finput" style="margin-top:1rem;background:var(--bg2)" placeholder="🔍 Search service (e.g. WhatsApp, Telegram, Netflix)..." onkeyup="filterServices()">
       </div>
+      <div class="app-svc-grid" id="appSvcGrid"></div>
 
-      <div class="app-svc-grid" id="appSvcGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text3)">
-          <div class="spinner" style="margin:0 auto .5rem"></div>Loading services...
-        </div>
-      </div>
-
-      <!-- ORDER PANEL -->
       <div class="order-panel" id="orderPanel" style="display:none">
-        <div class="op-head">
-          <h3 id="opTitle">Order</h3>
-          <button class="copy-btn" onclick="resetOrderPanel()">✕ Close</button>
-        </div>
+        <div class="op-head"><h3 id="opTitle">Order</h3><button class="copy-btn" onclick="resetOrderPanel()">✕ Close</button></div>
         <div class="op-body">
-          <div class="step-dots">
-            <div class="sdot on" id="sd1"></div>
-            <div class="sdot" id="sd2"></div>
-            <div class="sdot" id="sd3"></div>
-          </div>
-
-          <!-- Pane 1: Confirm order -->
+          <div class="step-dots"><div class="sdot on" id="sd1"></div><div class="sdot" id="sd2"></div><div class="sdot" id="sd3"></div></div>
           <div class="opane on" id="op1">
             <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1rem">
-              <div style="display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:.4rem">
-                <span style="color:var(--text2)">Service</span>
-                <span id="opSvc" style="font-weight:600">–</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:.4rem">
-                <span style="color:var(--text2)">Price</span>
-                <span id="opPrice" style="font-weight:700;color:var(--green)">–</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;font-size:.84rem">
-                <span style="color:var(--text2)">Your Balance</span>
-                <span id="opBal" style="font-weight:600">–</span>
-              </div>
+              <div style="display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:.4rem"><span style="color:var(--text2)">Service</span><span id="opSvc">–</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:.4rem"><span style="color:var(--text2)">Price</span><span id="opPrice" style="font-weight:700;color:var(--green)">–</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:.84rem"><span style="color:var(--text2)">Your Balance</span><span id="opBal">–</span></div>
             </div>
             <button class="fbtn" id="rentBtn" onclick="rentNumber()">⚡ Rent Number Now</button>
             <div class="smsg" id="op1msg"></div>
           </div>
-
-          <!-- Pane 2: Number received -->
           <div class="opane" id="op2">
-            <p style="font-size:.78rem;color:var(--text2);margin-bottom:.6rem">Your US number for <strong id="op2svc" style="color:var(--text)">–</strong></p>
-            <div class="num-box">
-              <span class="num-val" id="op2num">–</span>
-              <button class="copy-btn" onclick="copyEl('op2num',this)">Copy</button>
-            </div>
-            <p style="font-size:.76rem;color:var(--text2);margin-bottom:.9rem">📌 Enter this number on <strong id="op2svc2" style="color:var(--text)">–</strong>, then click Waiting for SMS.</p>
+            <p style="font-size:.78rem;color:var(--text2);margin-bottom:.6rem">Your US number for <strong id="op2svc">–</strong></p>
+            <div class="num-box"><span class="num-val" id="op2num">–</span><button class="copy-btn" onclick="copyEl('op2num',this)">Copy</button></div>
             <button class="fbtn fbtn-out" onclick="startPolling()">⏳ Waiting for SMS Code</button>
             <button class="fbtn" style="background:transparent;border:1px solid var(--border2);color:var(--text3);margin-top:.5rem;font-size:.8rem" onclick="cancelCurrentOrder()">Cancel & Refund</button>
           </div>
-
-          <!-- Pane 3: Waiting / Code -->
           <div class="opane" id="op3">
             <div id="waitDiv" style="text-align:center">
               <div class="spinner"></div>
               <p style="font-size:.83rem;color:var(--text2);margin-bottom:.3rem">Waiting for SMS on</p>
               <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:1rem" id="waitNum">–</p>
               <div>
-                <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--text3)">
-                  <span>Time remaining</span><span id="timerTxt">–</span>
-                </div>
+                <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--text3)"><span>Time remaining</span><span id="timerTxt">–</span></div>
                 <div class="timer-bar"><div class="timer-fill" id="timerFill" style="width:100%"></div></div>
               </div>
-              <p style="font-size:.7rem;color:var(--text3);margin-top:.4rem">Auto-checking every 5 seconds</p>
               <button class="fbtn" style="background:transparent;border:1px solid var(--border2);color:var(--text3);margin-top:.9rem;font-size:.8rem" onclick="cancelFromWait()">Cancel</button>
             </div>
-
             <div id="codeDiv" style="display:none">
               <div class="otp-box">
                 <div style="font-size:.7rem;color:var(--text3);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em">✅ SMS Code Received!</div>
                 <div class="otp-code" id="gotCode">–</div>
-                <div style="font-size:.7rem;color:var(--text3);margin-top:.3rem" id="gotSvc">–</div>
               </div>
               <button class="copy-btn" style="width:100%;justify-content:center;padding:10px;font-size:.82rem" onclick="copyEl('gotCode',this)">📋 Copy Code</button>
               <button class="fbtn fbtn-out" style="margin-top:.8rem" onclick="markOrderDone()">✓ Done — Mark Complete</button>
-              <button class="fbtn" style="background:transparent;border:1px solid var(--border2);color:var(--text2);margin-top:.5rem;font-size:.78rem" onclick="resetOrderPanel()">← Get Another Number</button>
             </div>
           </div>
-
         </div>
       </div>
     </div>
 
-    <!-- ── MY ORDERS ── -->
     <div class="app-page" id="ap-orders">
       <div class="app-page-title">📋 My Orders</div>
       <div class="otable-wrap">
-        <div class="otable-head">
-          <h3>All Orders</h3>
-          <button class="copy-btn" onclick="loadUserData()">↻ Refresh</button>
-        </div>
+        <div class="otable-head"><h3>All Orders</h3><button class="copy-btn" onclick="loadUserData()">↻ Refresh</button></div>
         <div style="overflow-x:auto">
           <table class="tbl">
-            <thead><tr>
-              <th>Service</th><th>Number</th><th>Code</th>
-              <th>Price</th><th>Status</th><th>Date</th>
-            </tr></thead>
-            <tbody id="allOrdersBody">
-              <tr><td colspan="6" style="text-align:center;color:var(--text3);padding:2rem">No orders yet</td></tr>
-            </tbody>
+            <thead><tr><th>Service</th><th>Number</th><th>Code</th><th>Price</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody id="allOrdersBody"><tr><td colspan="6" style="text-align:center;color:var(--text3);padding:2rem">No orders yet</td></tr></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- ── ADD BALANCE ── -->
     <div class="app-page" id="ap-topup">
       <div class="app-page-title">💰 Add Balance</div>
-
-      <!-- Current balance -->
       <div style="background:linear-gradient(135deg,rgba(0,229,160,.06),rgba(0,229,160,.02));border:1px solid rgba(0,229,160,.2);border-radius:13px;padding:1.2rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between">
-        <div>
-          <div style="font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.2rem">Current Balance</div>
-          <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:700;color:var(--green)" id="topupCurBal">₦0</div>
-        </div>
+        <div><div style="font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.2rem">Current Balance</div><div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:700;color:var(--green)" id="topupCurBal">₦0</div></div>
         <div style="font-size:1.8rem">💰</div>
       </div>
-
-      <!-- Payment method selection -->
-      <div style="margin-bottom:1.2rem">
-        <div class="slabel">Choose Payment Method</div>
-      </div>
       <div class="topup-grid">
-        <div class="topup-card selected" id="tc-crypto" onclick="selectTopupMethod('crypto')">
-          <div class="topup-icon">₿</div>
-          <div class="topup-name">Crypto (Binance Pay)</div>
-          <div class="topup-desc">USDT · BNB · BTC · Instant</div>
-        </div>
-        <div class="topup-card" id="tc-manual" onclick="selectTopupMethod('manual')">
-          <div class="topup-icon">💬</div>
-          <div class="topup-name">Manual (Support)</div>
-          <div class="topup-desc">WhatsApp · Telegram</div>
-        </div>
+        <div class="topup-card selected" id="tc-crypto" onclick="selectTopupMethod('crypto')"><div class="topup-icon">₿</div><div class="topup-name">Crypto (Binance Pay)</div></div>
+        <div class="topup-card" id="tc-manual" onclick="selectTopupMethod('manual')"><div class="topup-icon">💬</div><div class="topup-name">Manual (Support)</div></div>
       </div>
-
-      <!-- CRYPTO TOPUP -->
       <div id="cryptoTopup">
-        <div class="slabel" style="margin-bottom:.6rem">Select Amount</div>
         <div class="amount-grid">
           <button class="amt-btn" onclick="selectAmt(500)">₦500</button>
           <button class="amt-btn" onclick="selectAmt(1000)">₦1,000</button>
           <button class="amt-btn" onclick="selectAmt(2000)">₦2,000</button>
           <button class="amt-btn" onclick="selectAmt(5000)">₦5,000</button>
-          <button class="amt-btn" onclick="selectAmt(10000)">₦10,000</button>
-          <button class="amt-btn" onclick="selectAmt(20000)">₦20,000</button>
-          <button class="amt-btn" onclick="selectAmt(50000)">₦50,000</button>
-          <button class="amt-btn" id="customAmtBtn" onclick="selectAmt(0)">Custom</button>
-        </div>
-        <div class="fgroup" id="customAmtGroup" style="display:none">
-          <label class="flabel">Custom Amount (₦)</label>
-          <input type="number" class="finput" id="customAmtInput" placeholder="Enter amount" min="500">
         </div>
         <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.9rem;margin-bottom:1rem;font-size:.82rem">
-          <div style="display:flex;justify-content:space-between;margin-bottom:.3rem">
-            <span style="color:var(--text2)">Amount (NGN)</span>
-            <span id="cryptoNgn" style="font-weight:600">₦0</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:.3rem">
-            <span style="color:var(--text2)">USD equivalent</span>
-            <span id="cryptoUsd" style="color:var(--text2)">$0.00</span>
-          </div>
-          <div style="display:flex;justify-content:space-between">
-            <span style="color:var(--text2)">Exchange rate</span>
-            <span id="cryptoRate" style="color:var(--text2)">Loading...</span>
-          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:.3rem"><span style="color:var(--text2)">Amount (NGN)</span><span id="cryptoNgn">₦0</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--text2)">USD equivalent</span><span id="cryptoUsd">$0.00</span></div>
         </div>
-        <button class="fbtn" id="cryptoPayBtn" onclick="initCryptoPayment()" disabled>
-          ₿ Pay with Binance Pay
-        </button>
+        <button class="fbtn" id="cryptoPayBtn" onclick="initCryptoPayment()" disabled>₿ Pay with Binance Pay</button>
         <div class="smsg" id="cryptoMsg"></div>
       </div>
-
-      <!-- MANUAL TOPUP -->
       <div id="manualTopup" style="display:none">
-        <p style="font-size:.84rem;color:var(--text2);margin-bottom:1.2rem;line-height:1.7">
-          Contact our support team on WhatsApp or Telegram with your email address and payment amount. We'll add balance to your account within minutes.
-        </p>
-        <div style="display:flex;flex-direction:column;gap:.7rem">
-          <a id="manualWaBtn" href="#" target="_blank" class="fbtn" style="background:#25d366;text-decoration:none">
-            💬 Contact on WhatsApp
-          </a>
-          <a id="manualTgBtn" href="#" target="_blank" class="fbtn" style="background:#229ed9;text-decoration:none">
-            ✈️ Contact on Telegram
-          </a>
-        </div>
-        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-top:1rem;font-size:.8rem;color:var(--text2);line-height:1.7">
-          📌 Please include your registered email:<br>
-          <strong id="manualEmail" style="color:var(--text)">–</strong>
-        </div>
+        <div style="display:flex;flex-direction:column;gap:.7rem"><a id="manualWaBtn" href="#" target="_blank" class="fbtn" style="background:#25d366;text-decoration:none">💬 Contact on WhatsApp</a></div>
       </div>
-
     </div>
 
-    <!-- ── SUPPORT ── -->
     <div class="app-page" id="ap-support">
       <div class="app-page-title">💬 Support</div>
-      <p style="font-size:.88rem;color:var(--text2);margin-bottom:1.5rem;line-height:1.7">Need help? Our team is available 24/7 on WhatsApp and Telegram. Reach us directly.</p>
-      <div style="display:flex;flex-direction:column;gap:.8rem;max-width:360px">
-        <a id="suppWaBtn" href="#" target="_blank" class="fbtn" style="background:#25d366;text-decoration:none;font-size:.95rem">
-          💬 WhatsApp Support
-        </a>
-        <a id="suppTgBtn" href="#" target="_blank" class="fbtn" style="background:#229ed9;text-decoration:none;font-size:.95rem">
-          ✈️ Telegram Support
-        </a>
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.3rem;margin-top:1.5rem;max-width:360px">
-        <h3 style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.8rem">Common Questions</h3>
-        <div style="font-size:.82rem;color:var(--text2);line-height:2">
-          <p>🔹 No SMS received → Cancel for full refund</p>
-          <p>🔹 Balance not added → Send payment proof to support</p>
-          <p>🔹 Number not working → Try a different service</p>
-          <p>🔹 Code expired → Cancel and order a new number</p>
-        </div>
-      </div>
+      <a id="suppWaBtn" href="#" target="_blank" class="fbtn" style="background:#25d366;text-decoration:none;max-width:360px">💬 WhatsApp Support</a>
     </div>
+  </div>
+</div>
+</div>
 
-  </div><!-- /app-main -->
-</div><!-- /app-layout -->
-</div><!-- /appView -->
-
-
-<!-- ════ AUTH MODAL ════ -->
 <div class="modal-overlay" id="authModal">
   <div class="modal">
-    <div class="modal-head">
-      <h3 id="authModalTitle">Welcome to USAVerify</h3>
-      <button class="close-x" onclick="closeModal('authModal')">✕</button>
-    </div>
+    <div class="modal-head"><h3 id="authModalTitle">Welcome</h3><button class="close-x" onclick="closeModal('authModal')">✕</button></div>
     <div class="modal-body">
-      <div class="tabs">
-        <button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">Login</button>
-        <button class="tab" id="tabReg" onclick="switchAuthTab('register')">Register</button>
-      </div>
-
-      <!-- LOGIN -->
+      <div class="tabs"><button class="tab active" id="tabLogin" onclick="switchAuthTab('login')">Login</button><button class="tab" id="tabReg" onclick="switchAuthTab('register')">Register</button></div>
       <div id="loginPane">
-        <div class="fgroup">
-          <label class="flabel">Email</label>
-          <input type="email" class="finput" id="loginEmail" placeholder="your@email.com">
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Password</label>
-          <input type="password" class="finput" id="loginPwd" placeholder="Your password">
-        </div>
-        <button class="fbtn" id="loginBtn" onclick="doLogin()">Login to My Account</button>
-        <div class="smsg" id="loginMsg"></div>
+        <input type="email" class="finput" id="loginEmail" placeholder="Email"><input type="password" class="finput" id="loginPwd" placeholder="Password">
+        <button class="fbtn" id="loginBtn" onclick="doLogin()">Login</button><div class="smsg" id="loginMsg"></div>
       </div>
-
-      <!-- REGISTER -->
       <div id="regPane" style="display:none">
-        <div class="fgroup">
-          <label class="flabel">Full Name</label>
-          <input type="text" class="finput" id="regName" placeholder="Your name">
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Email</label>
-          <input type="email" class="finput" id="regEmail" placeholder="your@email.com">
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Password</label>
-          <input type="password" class="finput" id="regPwd" placeholder="Min 6 characters">
-        </div>
-        <button class="fbtn" id="regBtn" onclick="doRegister()">Create Free Account</button>
-        <div class="smsg" id="regMsg"></div>
+        <input type="text" class="finput" id="regName" placeholder="Full Name"><input type="email" class="finput" id="regEmail" placeholder="Email"><input type="password" class="finput" id="regPwd" placeholder="Password">
+        <button class="fbtn" id="regBtn" onclick="doRegister()">Register</button><div class="smsg" id="regMsg"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SUPPORT FLOAT BUTTONS (landing only) -->
-<div class="support-float" id="supportFloat">
-  <div class="support-label">Need help?</div>
-  <a id="waFloat" href="#" target="_blank" class="support-btn wa-btn" title="WhatsApp Support">💬</a>
-  <a id="tgFloat" href="#" target="_blank" class="support-btn tg-btn" title="Telegram Support">✈️</a>
-</div>
+<div class="support-float" id="supportFloat"><a id="waFloat" href="#" target="_blank" class="support-btn wa-btn">💬</a></div>
 
 <script>
-// ════════════════════════════════════════════
-//  CONFIG
-// ════════════════════════════════════════════
 const API = "https://usaverify-backend.onrender.com";
+let appUser = null, appOrders = [], services = [], ngRate = 1600, supportInfo = {};
+let orderSt = { service:"", serviceLabel:"", price:0, orderId:null, activationId:null, phone:null, pollTimer:null, countdownTimer:null, maxSecs:900, elapsed:0 };
+let topupAmt = 0, topupMethod = "crypto";
 
-// ════════════════════════════════════════════
-//  STATE
-// ════════════════════════════════════════════
-let appUser    = null;   // {name, email, balance, token}
-let appOrders  = [];
-let services   = [];
-let ngRate     = 1600;
-let supportInfo = {whatsapp: "#", telegram: "#"};
+const SVC_ICONS = { whatsapp:"💬", telegram:"✈️", facebook:"👤", google:"🔍", twitter:"🐦", instagram:"📸", tiktok:"🎵", discord:"🎮", chatgpt:"🤖", paypal:"💳", amazon:"📦", microsoft:"🪟", linkedin:"💼", uber:"🚗", netflix:"🎬", yahoo:"📧", coinbase:"🪙", viber:"📞", binance:"🟡", shopify:"🛍️" };
 
-let orderSt = {
-  service:"", serviceLabel:"", price:0,
-  orderId:null, activationId:null, phone:null,
-  pollTimer:null, countdownTimer:null,
-  maxSecs:900, elapsed:0
-};
-
-let topupAmt = 0;
-let topupMethod = "crypto";
-
-const SVC_ICONS = {
-  wa:"💬",tg:"✈️",fb:"👤",go:"🔍",tw:"🐦",ig:"📸",tt:"🎵",
-  ds:"🎮",oi:"🤖",pa:"💳",am:"📦",ma:"🪟",li:"💼",ub:"🚗",
-  nf:"🎬",ya:"📧",cl:"🪙",vi:"📞",bn:"🟡",sh:"🛍️"
-};
-
-// ════════════════════════════════════════════
-//  STORAGE
-// ════════════════════════════════════════════
-function saveSession(token, user) {
-  localStorage.setItem("uv_token", token);
-  localStorage.setItem("uv_user",  JSON.stringify(user));
-}
-function clearSession() {
-  localStorage.removeItem("uv_token");
-  localStorage.removeItem("uv_user");
-}
+function saveSession(token, user) { localStorage.setItem("uv_token", token); localStorage.setItem("uv_user", JSON.stringify(user)); }
+function clearSession() { localStorage.removeItem("uv_token"); localStorage.removeItem("uv_user"); }
 function getToken() { return localStorage.getItem("uv_token") || ""; }
-
-// ════════════════════════════════════════════
-//  HELPERS
-// ════════════════════════════════════════════
-function authH() {
-  return {"Content-Type":"application/json","Authorization":"Bearer "+getToken()};
-}
-function setMsg(id, txt, type="info") {
-  const el = document.getElementById(id);
-  if(!el) return;
-  el.textContent = txt;
-  el.className = "smsg " + type;
-}
-function btnLoad(id, loading, label="") {
-  const b = document.getElementById(id);
-  if(!b) return;
-  b.disabled = loading;
-  if(label) b.innerHTML = loading
-    ? `<span style="display:inline-block;animation:spin .8s linear infinite">↻</span> ${label}`
-    : label;
-}
-function copyEl(srcId, btn) {
-  const txt = document.getElementById(srcId).textContent;
-  navigator.clipboard.writeText(txt).then(() => {
-    const o = btn.textContent;
-    btn.textContent = "✓ Copied!";
-    setTimeout(() => btn.textContent = o, 2000);
-  });
-}
-function fmtDate(iso) {
-  if(!iso) return "–";
-  return new Date(iso).toLocaleDateString("en-NG",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
-}
-function statusBadge(s) {
-  if(s==="received")  return `<span class="badge b-green">✅ Done</span>`;
-  if(s==="waiting")   return `<span class="badge b-yellow">⏳ Waiting</span>`;
-  if(s==="cancelled") return `<span class="badge b-red">❌ Cancelled</span>`;
-  return `<span class="badge b-purple">${s}</span>`;
-}
+function authH() { return {"Content-Type":"application/json","Authorization":"Bearer "+getToken()}; }
+function setMsg(id, txt, type="info") { const el = document.getElementById(id); if(el) { el.textContent = txt; el.className = "smsg " + type; } }
+function btnLoad(id, l, lbl="") { const b = document.getElementById(id); if(b) { b.disabled = l; if(lbl) b.innerHTML = l ? `↻ Processing` : lbl; } }
+function copyEl(id, btn) { navigator.clipboard.writeText(document.getElementById(id).textContent).then(() => { btn.textContent = "✓ Copied!"; setTimeout(() => btn.textContent = "Copy", 2000); }); }
+function fmtDate(iso) { if(!iso) return "–"; return new Date(iso).toLocaleDateString("en-NG",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}); }
+function statusBadge(s) { return `<span class="badge ${s==='received'?'b-green':s==='waiting'?'b-yellow':'b-red'}">${s.toUpperCase()}</span>`; }
 function openModal(id) { document.getElementById(id).classList.add("open") }
 function closeModal(id) { document.getElementById(id).classList.remove("open") }
 
-// ════════════════════════════════════════════
-//  SUPPORT INFO
-// ════════════════════════════════════════════
+function filterServices() {
+  let query = document.getElementById("svcSearch").value.toLowerCase();
+  document.querySelectorAll(".app-svc-card").forEach(card => {
+    let name = card.querySelector(".asc-name").textContent.toLowerCase();
+    card.style.display = name.includes(query) ? "block" : "none";
+  });
+}
+
 async function loadSupportInfo() {
   try {
-    const r = await fetch(`${API}/api/support`);
-    const j = await r.json();
-    if(j.ok) {
-      supportInfo = j;
-      // Update all support links
-      const links = {
-        waFloat: j.whatsapp, tgFloat: j.telegram,
-        suppWaBtn: j.whatsapp, suppTgBtn: j.telegram,
-        manualWaBtn: j.whatsapp, manualTgBtn: j.telegram,
-        footerWa: j.whatsapp, footerTg: j.telegram,
-        landWa: null, landTg: null
-      };
-      Object.entries(links).forEach(([id, href]) => {
-        const el = document.getElementById(id);
-        if(!el) return;
-        if(href) el.href = href;
-      });
-      const lwa = document.getElementById("landWa");
-      const ltg = document.getElementById("landTg");
-      if(lwa) lwa.textContent = `wa.me/${j.whatsapp_number}`;
-      if(ltg) ltg.textContent = `@${j.telegram_user}`;
-    }
+    const r = await fetch(`${API}/api/support`); const j = await r.json();
+    if(j.ok) { supportInfo = j; document.getElementById("waFloat").href = j.whatsapp; document.getElementById("manualWaBtn").href = j.whatsapp; document.getElementById("suppWaBtn").href = j.whatsapp; }
   } catch(e) {}
 }
 
-// ════════════════════════════════════════════
-//  SERVICES LOAD
-// ════════════════════════════════════════════
 async function loadServices() {
   try {
-    const r = await fetch(`${API}/api/services`);
-    const j = await r.json();
-    if(j.ok) {
-      services = j.services;
-      ngRate   = j.rate || ngRate;
-      renderLandingServices();
-      renderAppServices();
-    }
-  } catch(e) {
-    document.getElementById("svcPreviewGrid").innerHTML =
-      `<div style="grid-column:1/-1;color:var(--red);text-align:center;font-size:.82rem">⚠ Could not load services</div>`;
-  }
+    const r = await fetch(`${API}/api/services`); const j = await r.json();
+    if(j.ok) { services = j.services; ngRate = j.rate || ngRate; renderLandingServices(); renderAppServices(); }
+  } catch(e) {}
 }
 
 function renderLandingServices() {
-  const grid = document.getElementById("svcPreviewGrid");
-  if(!grid) return;
-  const top8 = services.slice(0,8);
-  grid.innerHTML = top8.map(s => `
+  const grid = document.getElementById("svcPreviewGrid"); if(!grid) return;
+  grid.innerHTML = services.slice(0,8).map(s => `
     <div class="svc-prev" onclick="openAuth('register')">
       <div class="svc-prev-icon">${SVC_ICONS[s.code]||"📱"}</div>
       <div class="svc-prev-name">${s.name}</div>
-      <div class="svc-prev-price ${!s.available?'loading':''}">
-        ${s.available ? `₦${s.price_ngn.toLocaleString()}` : 'Unavailable'}
-      </div>
+      <div class="svc-prev-price">${s.available ? `₦${s.price_ngn}` : 'Out'}</div>
     </div>
   `).join("");
 }
 
 function renderAppServices() {
-  const grid = document.getElementById("appSvcGrid");
-  if(!grid) return;
+  const grid = document.getElementById("appSvcGrid"); if(!grid) return;
   grid.innerHTML = services.map(s => `
-    <div class="app-svc-card ${!s.available?'unavail':''}" id="asvc_${s.code}" onclick="selectSvc('${s.code}')">
-      <div class="asc-icon">${SVC_ICONS[s.code]||"📱"}</div>
-      <div class="asc-name">${s.name}</div>
-      <div class="asc-price">₦${s.price_ngn.toLocaleString()}</div>
-      ${s.available ? `<div class="asc-badge">✓</div>` : `<div class="asc-badge" style="background:rgba(255,77,109,.1);color:var(--red)">Out</div>`}
+    <div class="app-svc-card ${!s.available?'unavail' : ''}" id="asvc_${s.code}" onclick="selectSvc('${s.code}')">
+      <div class="asc-icon">${SVC_ICONS[s.code]||"📱"}</div><div class="asc-name">${s.name}</div>
+      <div class="asc-price">₦${s.price_ngn}</div>
+      <div class="asc-badge" style="background:${s.available?'':'rgba(255,77,109,.1)'};color:${s.available?'':'var(--red)'}">${s.available?'✓':'Out'}</div>
     </div>
-  `).join("") || `<div style="grid-column:1/-1;color:var(--text3);text-align:center;padding:2rem">No services available</div>`;
+  `).join("");
 }
 
-// ════════════════════════════════════════════
-//  AUTH MODAL
-// ════════════════════════════════════════════
-function openAuth(tab="login") {
-  switchAuthTab(tab);
-  openModal("authModal");
-}
+function openAuth(tab="login") { switchAuthTab(tab); openModal("authModal"); }
 function switchAuthTab(t) {
-  document.getElementById("loginPane").style.display = t==="login"    ? "block" : "none";
-  document.getElementById("regPane").style.display   = t==="register" ? "block" : "none";
+  document.getElementById("loginPane").style.display = t==="login" ? "block" : "none";
+  document.getElementById("regPane").style.display = t==="register" ? "block" : "none";
   document.getElementById("tabLogin").classList.toggle("active", t==="login");
-  document.getElementById("tabReg").classList.toggle("active",   t==="register");
-  document.getElementById("authModalTitle").textContent = t==="login" ? "Login to USAVerify" : "Create Free Account";
+  document.getElementById("tabReg").classList.toggle("active", t==="register");
 }
 
 async function doLogin() {
   const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-  const pwd   = document.getElementById("loginPwd").value.trim();
-  if(!email||!pwd) { setMsg("loginMsg","Enter email and password","err"); return; }
-
-  btnLoad("loginBtn",true,"Logging in...");
+  const pwd = document.getElementById("loginPwd").value.trim();
+  if(!email||!pwd) return;
+  btnLoad("loginBtn",true);
   try {
-    const r = await fetch(`${API}/api/login`, {
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({email, password:pwd})
-    });
-    const j = await r.json();
-    if(j.ok) {
-      saveSession(j.token, j.user);
-      appUser = {...j.user, token: j.token};
-      closeModal("authModal");
-      enterApp();
-    } else {
-      setMsg("loginMsg", j.error, "err");
-    }
-  } catch(e) {
-    setMsg("loginMsg","Connection error. Try again.","err");
-  }
-  btnLoad("loginBtn",false,"Login to My Account");
+    const r = await fetch(`${API}/api/login`, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email, password:pwd}) });
+    const j = await r.json(); if(j.ok) { saveSession(j.token, j.user); appUser = {...j.user, token: j.token}; closeModal("authModal"); enterApp(); } else setMsg("loginMsg", j.error, "err");
+  } catch(e){}
+  btnLoad("loginBtn",false,"Login");
 }
 
 async function doRegister() {
-  const name  = document.getElementById("regName").value.trim();
+  const name = document.getElementById("regName").value.trim();
   const email = document.getElementById("regEmail").value.trim().toLowerCase();
-  const pwd   = document.getElementById("regPwd").value.trim();
-  if(!name||!email||!pwd) { setMsg("regMsg","Fill all fields","err"); return; }
-  if(pwd.length<6)        { setMsg("regMsg","Password must be 6+ characters","err"); return; }
-
-  btnLoad("regBtn",true,"Creating account...");
+  const pwd = document.getElementById("regPwd").value.trim();
+  if(!name||!email||!pwd) return;
+  btnLoad("regBtn",true);
   try {
-    const r = await fetch(`${API}/api/register`, {
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({name, email, password:pwd})
-    });
-    const j = await r.json();
-    if(j.ok) {
-      saveSession(j.token, j.user);
-      appUser = {...j.user, token: j.token};
-      closeModal("authModal");
-      enterApp();
-    } else {
-      setMsg("regMsg", j.error, "err");
-    }
-  } catch(e) {
-    setMsg("regMsg","Connection error. Try again.","err");
-  }
-  btnLoad("regBtn",false,"Create Free Account");
+    const r = await fetch(`${API}/api/register`, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({name, email, password:pwd}) });
+    const j = await r.json(); if(j.ok) { saveSession(j.token, j.user); appUser = {...j.user, token: j.token}; closeModal("authModal"); enterApp(); } else setMsg("regMsg", j.error, "err");
+  } catch(e){}
+  btnLoad("regBtn",false,"Register");
 }
 
-// ════════════════════════════════════════════
-//  APP ENTER / EXIT
-// ════════════════════════════════════════════
 function enterApp() {
-  document.getElementById("landingView").style.display  = "none";
-  document.getElementById("appView").style.display      = "block";
-  document.getElementById("supportFloat").style.display = "none";
-  updateSidebar();
-  loadUserData();
-  loadServices();
-  showAppPage("dashboard");
-}
-
-function updateSidebar() {
-  if(!appUser) return;
-  document.getElementById("sidebarName").textContent  = appUser.name;
-  document.getElementById("sidebarEmail").textContent = appUser.email;
-  const bal = "₦" + (appUser.balance||0).toLocaleString();
-  document.getElementById("sidebarBal").textContent   = bal;
-  document.getElementById("appTopBal").textContent    = bal;
-  document.getElementById("dbBal").textContent        = bal;
-  document.getElementById("topupCurBal").textContent  = bal;
-  document.getElementById("manualEmail").textContent  = appUser.email;
-  // Update support buttons in app
-  document.getElementById("manualWaBtn").href = supportInfo.whatsapp;
-  document.getElementById("manualTgBtn").href = supportInfo.telegram;
-  document.getElementById("suppWaBtn").href   = supportInfo.whatsapp;
-  document.getElementById("suppTgBtn").href   = supportInfo.telegram;
+  document.getElementById("landingView").style.display = "none"; document.getElementById("appView").style.display = "block"; document.getElementById("supportFloat").style.display = "none";
+  loadUserData(); showAppPage("dashboard");
 }
 
 async function loadUserData() {
   try {
-    const r = await fetch(`${API}/api/me`, {headers: authH()});
-    const j = await r.json();
-    if(j.ok) {
-      appUser.balance = j.user.balance;
-      appOrders = j.orders || [];
-      updateSidebar();
-      renderOrders();
-    } else if(r.status===401) {
-      doLogout();
-    }
-  } catch(e) {}
+    const r = await fetch(`${API}/api/me`, {headers: authH()}); const j = await r.json();
+    if(j.ok) { appUser.balance = j.user.balance; appOrders = j.orders || []; updateSidebar(); renderOrders(); }
+  } catch(e){}
+}
+
+function updateSidebar() {
+  document.getElementById("sidebarName").textContent = appUser.name; document.getElementById("sidebarEmail").textContent = appUser.email;
+  const bal = "₦" + appUser.balance; document.getElementById("sidebarBal").textContent = bal; document.getElementById("appTopBal").textContent = bal; document.getElementById("dbBal").textContent = bal; document.getElementById("topupCurBal").textContent = bal;
 }
 
 function renderOrders() {
-  const rows = appOrders.map(o => `
-    <tr>
-      <td>${SVC_ICONS[o.service]||"📱"} ${o.service_name||o.service}</td>
-      <td style="font-family:monospace;font-size:.78rem">${o.phone||"–"}</td>
-      <td style="font-family:monospace;font-weight:700;color:var(--green)">${o.sms_code||"–"}</td>
-      <td style="color:var(--green);font-weight:600">₦${(o.price_ngn||0).toLocaleString()}</td>
-      <td>${statusBadge(o.status)}</td>
-      <td style="color:var(--text3);font-size:.74rem">${fmtDate(o.created_at)}</td>
-    </tr>
-  `).join("") || `<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:2rem">No orders yet</td></tr>`;
-
-  document.getElementById("dashOrdersBody").innerHTML = rows;
-  document.getElementById("allOrdersBody").innerHTML  = rows;
-
-  // Stats
-  const done  = appOrders.filter(o=>o.status==="received").length;
-  const spent = appOrders.filter(o=>o.status!=="cancelled").reduce((s,o)=>s+(o.price_ngn||0),0);
+  const rows = appOrders.map(o => `<tr><td>${o.service_name||o.service}</td><td>${o.phone||"–"}</td><td>${o.sms_code||"–"}</td><td>₦${o.price_ngn}</td><td>${statusBadge(o.status)}</td><td>${fmtDate(o.created_at)}</td></tr>`).join("");
+  document.getElementById("dashOrdersBody").innerHTML = rows || `<tr><td colspan="5" style="text-align:center">No orders yet</td></tr>`;
   document.getElementById("dbOrders").textContent = appOrders.length;
-  document.getElementById("dbDone").textContent   = done;
-  document.getElementById("dbSpent").textContent  = "₦" + spent.toLocaleString();
 }
 
-async function doLogout() {
-  try { await fetch(`${API}/api/logout`,{method:"POST",headers:authH()}); } catch(e){}
-  clearSession();
-  appUser=null; appOrders=[];
-  document.getElementById("landingView").style.display  = "block";
-  document.getElementById("appView").style.display      = "none";
-  document.getElementById("supportFloat").style.display = "flex";
-}
+function doLogout() { clearSession(); location.reload(); }
+function showAppPage(name) { document.querySelectorAll(".app-page").forEach(p => p.classList.toggle("on", p.id==="ap-"+name)); }
+function toggleMobSidebar() { document.getElementById("appSidebar").classList.toggle("mob-open"); }
 
-// ════════════════════════════════════════════
-//  APP NAVIGATION
-// ════════════════════════════════════════════
-function showAppPage(name) {
-  document.querySelectorAll(".app-page").forEach(p => p.classList.remove("on"));
-  document.querySelectorAll(".sn-item").forEach(n => n.classList.remove("active"));
-  document.getElementById("ap-"+name).classList.add("on");
-  const navEl = document.getElementById("nav-"+name);
-  if(navEl) navEl.classList.add("active");
-  const titles = {dashboard:"Dashboard",verify:"Get Number",orders:"My Orders",topup:"Add Balance",support:"Support"};
-  document.getElementById("appTopTitle").textContent = titles[name]||name;
-  // Close mobile sidebar
-  document.getElementById("appSidebar").classList.remove("mob-open");
-}
-function toggleMobSidebar() {
-  document.getElementById("appSidebar").classList.toggle("mob-open");
-}
-
-// ════════════════════════════════════════════
-//  ORDER FLOW
-// ════════════════════════════════════════════
 function selectSvc(code) {
-  const svc = services.find(s=>s.code===code);
-  if(!svc||!svc.available) return;
-
-  document.querySelectorAll(".app-svc-card").forEach(c=>c.classList.remove("selected"));
-  document.getElementById("asvc_"+code)?.classList.add("selected");
-
-  orderSt.service      = code;
-  orderSt.serviceLabel = svc.name;
-  orderSt.price        = svc.price_ngn;
-
-  document.getElementById("opTitle").textContent  = `Order — ${svc.name}`;
-  document.getElementById("opSvc").textContent    = svc.name;
-  document.getElementById("opPrice").textContent  = `₦${svc.price_ngn.toLocaleString()}`;
-  document.getElementById("opBal").textContent    = `₦${(appUser?.balance||0).toLocaleString()}`;
-  setMsg("op1msg","","info");
-  showOpPane(1);
+  const svc = services.find(s=>s.code===code); if(!svc||!svc.available) return;
+  orderSt.service = code; orderSt.serviceLabel = svc.name; orderSt.price = svc.price_ngn;
+  document.getElementById("opTitle").textContent = `Order — ${svc.name}`;
+  document.getElementById("opSvc").textContent = svc.name;
+  document.getElementById("opPrice").textContent = `₦${svc.price_ngn}`;
+  document.getElementById("opBal").textContent = `₦${appUser.balance}`;
   document.getElementById("orderPanel").style.display = "block";
-  document.getElementById("orderPanel").scrollIntoView({behavior:"smooth",block:"nearest"});
+  showOpPane(1);
 }
 
-function showOpPane(n) {
-  [1,2,3].forEach(i => {
-    document.getElementById("op"+i).classList.toggle("on",i===n);
-    document.getElementById("sd"+i).classList.toggle("on",i<=n);
-  });
-}
+function showOpPane(n) { [1,2,3].forEach(i => { document.getElementById("op"+i).classList.toggle("on", i===n); document.getElementById("sd"+i).classList.toggle("on", i<=n); }); }
 
 async function rentNumber() {
-  btnLoad("rentBtn",true,"Renting...");
-  setMsg("op1msg","","info");
+  btnLoad("rentBtn",true);
   try {
-    const r = await fetch(`${API}/api/order`, {
-      method:"POST", headers: authH(),
-      body: JSON.stringify({service: orderSt.service})
-    });
+    const r = await fetch(`${API}/api/order`, { method:"POST", headers: authH(), body: JSON.stringify({service: orderSt.service}) });
     const j = await r.json();
-    if(j.ok) {
-      orderSt.orderId      = j.order_id;
-      orderSt.activationId = j.activation_id;
-      orderSt.phone        = j.phone;
-      appUser.balance      = j.new_balance;
-      updateSidebar();
-      document.getElementById("op2num").textContent  = j.phone;
-      document.getElementById("op2svc").textContent  = orderSt.serviceLabel;
-      document.getElementById("op2svc2").textContent = orderSt.serviceLabel;
-      document.getElementById("waitDiv").style.display  = "block";
-      document.getElementById("codeDiv").style.display  = "none";
-      showOpPane(2);
-    } else {
-      setMsg("op1msg", j.error, "err");
-    }
-  } catch(e) {
-    setMsg("op1msg","Connection error. Try again.","err");
-  }
+    if(j.ok) { orderSt.orderId = j.order_id; orderSt.activationId = j.activation_id; orderSt.phone = j.phone; appUser.balance = j.new_balance; updateSidebar(); document.getElementById("op2num").textContent = j.phone; document.getElementById("op2svc").textContent = orderSt.serviceLabel; showOpPane(2); } else setMsg("op1msg", j.error, "err");
+  } catch(e){}
   btnLoad("rentBtn",false,"⚡ Rent Number Now");
 }
 
 function startPolling() {
-  document.getElementById("waitNum").textContent = orderSt.phone;
-  orderSt.elapsed=0; orderSt.maxSecs=900;
-  updateTimer();
-  orderSt.countdownTimer = setInterval(tickTimer,1000);
-  orderSt.pollTimer      = setInterval(doPoll,5000);
+  document.getElementById("waitNum").textContent = orderSt.phone; orderSt.elapsed = 0;
+  orderSt.countdownTimer = setInterval(() => { orderSt.elapsed++; if(orderSt.elapsed>=900) { cancelFromWait(); } document.getElementById("timerTxt").textContent = Math.floor((900-orderSt.elapsed)/60) + "m"; }, 1000);
+  orderSt.pollTimer = setInterval(async () => {
+    const r = await fetch(`${API}/api/check_sms?id=${orderSt.activationId}`); const j = await r.json();
+    if(j.status==="received") { clearInterval(orderSt.pollTimer); clearInterval(orderSt.countdownTimer); document.getElementById("gotCode").textContent = j.code; document.getElementById("waitDiv").style.display = "none"; document.getElementById("codeDiv").style.display = "block"; loadUserData(); }
+  }, 5000);
   showOpPane(3);
-  doPoll();
-}
-
-function tickTimer() {
-  orderSt.elapsed++;
-  if(orderSt.elapsed>=orderSt.maxSecs) { stopPolling(); cancelCurrentOrder(); }
-  updateTimer();
-}
-function updateTimer() {
-  const rem = Math.max(0, orderSt.maxSecs-orderSt.elapsed);
-  const m=Math.floor(rem/60), s=rem%60;
-  document.getElementById("timerTxt").textContent   = m+"m "+(s<10?"0":"")+s+"s";
-  document.getElementById("timerFill").style.width  = ((orderSt.maxSecs-orderSt.elapsed)/orderSt.maxSecs*100)+"%";
-}
-
-async function doPoll() {
-  if(!orderSt.activationId) return;
-  try {
-    const r = await fetch(`${API}/api/check_sms?id=${orderSt.activationId}`);
-    const j = await r.json();
-    if(j.status==="received") {
-      stopPolling();
-      document.getElementById("gotCode").textContent = j.code;
-      document.getElementById("gotSvc").textContent  = orderSt.serviceLabel+" verification code";
-      document.getElementById("waitDiv").style.display = "none";
-      document.getElementById("codeDiv").style.display = "block";
-      loadUserData();
-    }
-  } catch(e){}
-}
-
-function stopPolling() {
-  clearInterval(orderSt.pollTimer);
-  clearInterval(orderSt.countdownTimer);
-  orderSt.pollTimer=null; orderSt.countdownTimer=null;
 }
 
 async function cancelCurrentOrder() {
-  if(!orderSt.orderId) { resetOrderPanel(); return; }
-  try {
-    const r = await fetch(`${API}/api/cancel`, {
-      method:"POST", headers:authH(),
-      body:JSON.stringify({order_id:orderSt.orderId})
-    });
-    const j = await r.json();
-    if(j.ok) { appUser.balance+=j.refunded; updateSidebar(); }
-  } catch(e){}
-  resetOrderPanel();
+  await fetch(`${API}/api/cancel`, { method:"POST", headers:authH(), body:JSON.stringify({order_id:orderSt.orderId}) }); loadUserData(); resetOrderPanel();
 }
+function cancelFromWait() { clearInterval(orderSt.pollTimer); clearInterval(orderSt.countdownTimer); cancelCurrentOrder(); }
+async function markOrderDone() { await fetch(`${API}/api/mark_done`,{method:"POST",headers:authH(),body:JSON.stringify({activation_id:orderSt.activationId})}); loadUserData(); resetOrderPanel(); }
+function resetOrderPanel() { document.getElementById("orderPanel").style.display="none"; }
 
-async function cancelFromWait() { stopPolling(); await cancelCurrentOrder(); }
-
-async function markOrderDone() {
-  if(orderSt.activationId) {
-    try { await fetch(`${API}/api/mark_done`,{method:"POST",headers:authH(),body:JSON.stringify({activation_id:orderSt.activationId})}); } catch(e){}
-  }
-  loadUserData();
-  resetOrderPanel();
-}
-
-function resetOrderPanel() {
-  stopPolling();
-  orderSt.orderId=null; orderSt.activationId=null; orderSt.phone=null; orderSt.elapsed=0; orderSt.service="";
-  document.querySelectorAll(".app-svc-card").forEach(c=>c.classList.remove("selected"));
-  document.getElementById("orderPanel").style.display="none";
-  showOpPane(1);
-  setMsg("op1msg","","info");
-  document.getElementById("waitDiv").style.display="block";
-  document.getElementById("codeDiv").style.display="none";
-}
-
-// ════════════════════════════════════════════
-//  TOPUP
-// ════════════════════════════════════════════
-function selectTopupMethod(m) {
-  topupMethod = m;
-  document.getElementById("tc-crypto").classList.toggle("selected",m==="crypto");
-  document.getElementById("tc-manual").classList.toggle("selected",m==="manual");
-  document.getElementById("cryptoTopup").style.display = m==="crypto" ? "block" : "none";
-  document.getElementById("manualTopup").style.display = m==="manual" ? "block" : "none";
-}
-
-function selectAmt(amt) {
-  document.querySelectorAll(".amt-btn").forEach(b=>b.classList.remove("selected"));
-  if(amt===0) {
-    document.getElementById("customAmtBtn").classList.add("selected");
-    document.getElementById("customAmtGroup").style.display="block";
-    document.getElementById("customAmtInput").focus();
-    document.getElementById("customAmtInput").oninput = () => {
-      topupAmt = parseFloat(document.getElementById("customAmtInput").value)||0;
-      updateCryptoCalc();
-    };
-  } else {
-    document.getElementById("customAmtGroup").style.display="none";
-    const btns = document.querySelectorAll(".amt-btn");
-    btns.forEach(b => { if(b.textContent.replace(/[₦,]/g,"")===String(amt).replace(/\B(?=(\d{3})+(?!\d))/g,",") || b.onclick.toString().includes(amt)) b.classList.add("selected"); });
-    // simpler: match by click
-    topupAmt = amt;
-    updateCryptoCalc();
-  }
-}
-
-function updateCryptoCalc() {
-  const usd = topupAmt/ngRate;
-  document.getElementById("cryptoNgn").textContent  = topupAmt ? `₦${topupAmt.toLocaleString()}` : "₦0";
-  document.getElementById("cryptoUsd").textContent  = topupAmt ? `$${usd.toFixed(2)}` : "$0.00";
-  document.getElementById("cryptoRate").textContent = `$1 = ₦${ngRate.toLocaleString()}`;
-  document.getElementById("cryptoPayBtn").disabled  = topupAmt < 500;
-}
-
+function selectTopupMethod(m) { document.getElementById("cryptoTopup").style.display = m==="crypto"?"block":"none"; document.getElementById("manualTopup").style.display = m==="manual"?"block":"none"; }
+function selectAmt(amt) { topupAmt = amt; document.getElementById("cryptoNgn").textContent = "₦"+amt; document.getElementById("cryptoUsd").textContent = "$"+(amt/ngRate).toFixed(2); document.getElementById("cryptoPayBtn").disabled = false; }
 async function initCryptoPayment() {
-  if(topupAmt<500) return;
-  btnLoad("cryptoPayBtn",true,"Processing...");
-  setMsg("cryptoMsg","","info");
-  try {
-    const r = await fetch(`${API}/api/crypto/create_order`,{
-      method:"POST", headers:authH(),
-      body:JSON.stringify({amount_ngn: topupAmt})
-    });
-    const j = await r.json();
-    if(j.ok) {
-      if(j.method==="binance" && j.checkout_url) {
-        window.open(j.checkout_url,"_blank");
-        setMsg("cryptoMsg","Binance Pay opened! Complete payment there.","ok");
-      } else {
-        // Placeholder — direct to support
-        setMsg("cryptoMsg","Crypto auto-pay coming soon. Please use Manual support for now.","info");
-        setTimeout(() => selectTopupMethod("manual"),2000);
-      }
-    } else {
-      setMsg("cryptoMsg", j.error,"err");
-    }
-  } catch(e) {
-    setMsg("cryptoMsg","Connection error","err");
-  }
-  btnLoad("cryptoPayBtn",false,"₿ Pay with Binance Pay");
+  const r = await fetch(`${API}/api/crypto/create_order`,{ method:"POST", headers:authH(), body:JSON.stringify({amount_ngn: topupAmt}) });
+  const j = await r.json(); if(j.ok && j.checkout_url) window.open(j.checkout_url,"_blank");
 }
 
-// ════════════════════════════════════════════
-//  INIT
-// ════════════════════════════════════════════
 (async function init() {
-  // Load support info + services
-  await loadSupportInfo();
-  loadServices();
-
-  // Check existing session
-  const token = getToken();
-  if(token) {
-    try {
-      const r = await fetch(`${API}/api/me`,{headers:{"Authorization":"Bearer "+token}});
-      const j = await r.json();
-      if(j.ok) {
-        appUser  = {...j.user, token};
-        appOrders = j.orders||[];
-        enterApp();
-        return;
-      }
-    } catch(e){}
-    clearSession();
-  }
-
-  // Default rate display
-  document.getElementById("cryptoRate").textContent = `$1 = ₦${ngRate.toLocaleString()}`;
+  await loadSupportInfo(); loadServices();
+  const token = getToken(); if(token) { enterApp(); }
 })();
-
-// Close modals on overlay click
-document.querySelectorAll(".modal-overlay").forEach(o => {
-  o.addEventListener("click", e => { if(e.target===o) o.classList.remove("open"); });
-});
-
-// Enter key helpers
-document.getElementById("loginPwd").addEventListener("keydown",  e => { if(e.key==="Enter") doLogin(); });
-document.getElementById("regPwd").addEventListener("keydown",    e => { if(e.key==="Enter") doRegister(); });
 </script>
 </body>
 </html>
