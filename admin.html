@@ -17,7 +17,6 @@
 }
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
-/* LOGIN */
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem}
 .login-card{background:var(--card);border:1px solid var(--border2);border-radius:18px;padding:2.5rem;width:100%;max-width:380px}
 .login-card h1{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.3rem}
@@ -29,7 +28,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .smsg{font-size:.8rem;margin-top:.5rem;min-height:16px}
 .smsg.err{color:var(--red)}.smsg.ok{color:var(--green)}
 
-/* ADMIN LAYOUT */
 #adminApp{display:none}
 .sidebar{position:fixed;top:0;left:0;bottom:0;width:220px;background:var(--bg2);border-right:1px solid var(--border);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:.3rem}
 .sidebar-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:1.2rem;padding:.5rem;color:var(--text);display:flex;align-items:center;gap:7px}
@@ -41,7 +39,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .page{display:none}.page.on{display:block}
 .page-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:1.5rem}
 
-/* STAT CARDS */
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.2rem}
 .stat-label{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem}
@@ -51,7 +48,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .stat-val.yellow{color:var(--yellow)}
 .stat-val.red{color:var(--red)}
 
-/* TABLES */
 .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:13px;overflow:hidden;margin-top:1rem}
 .table-head{padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .table-head h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700}
@@ -68,7 +64,6 @@ tr:hover td{background:rgba(255,255,255,.02)}
 .badge-red{background:rgba(255,77,109,.12);color:var(--red)}
 .badge-purple{background:var(--adim);color:var(--accent)}
 
-/* ADD BALANCE FORM */
 .form-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.5rem;max-width:440px}
 .form-card h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:1.2rem}
 .fgroup{margin-bottom:.9rem}
@@ -78,12 +73,10 @@ tr:hover td{background:rgba(255,255,255,.02)}
 .submit-btn{background:var(--green);color:#000;border:none;border-radius:9px;padding:12px 24px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
 .submit-btn:hover{opacity:.85}
 
-/* DAISY BALANCE */
 .daisy-card{background:linear-gradient(135deg,rgba(0,229,160,.06),rgba(0,229,160,.02));border:1px solid rgba(0,229,160,.2);border-radius:13px;padding:1.5rem;max-width:320px;text-align:center;margin-bottom:1.5rem}
 .daisy-bal{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;color:var(--green)}
 .daisy-lbl{font-size:.75rem;color:var(--text3);margin-top:.3rem}
 
-/* SETTINGS */
 .settings-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.5rem;max-width:500px;margin-bottom:1rem}
 .settings-card h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:1.2rem}
 .setting-row{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;border-bottom:1px solid var(--border)}
@@ -91,7 +84,6 @@ tr:hover td{background:rgba(255,255,255,.02)}
 .setting-label{font-size:.85rem;color:var(--text2)}
 .setting-val{font-size:.85rem;font-weight:600;color:var(--text)}
 
-/* MOBILE */
 @media(max-width:700px){
   .sidebar{width:100%;position:static;flex-direction:row;flex-wrap:wrap;padding:.8rem;gap:.4rem}
   .main{margin-left:0;padding:1rem}
@@ -101,21 +93,17 @@ tr:hover td{background:rgba(255,255,255,.02)}
 </head>
 <body>
 
-<!-- ── LOGIN ── -->
 <div class="login-wrap" id="loginWrap">
   <div class="login-card">
     <h1>Admin Panel</h1>
-    <p>USAVerify — Reseller Dashboard</p>
+    <p>USAVerify — Cloud Dashboard</p>
     <input type="password" class="finput" id="adminPwd" placeholder="Admin password">
     <button class="fbtn" onclick="adminLogin()">Login</button>
     <div class="smsg" id="loginErr"></div>
   </div>
 </div>
 
-<!-- ── ADMIN APP ── -->
 <div id="adminApp">
-
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sidebar-logo">⚡ <span>Admin</span></div>
     <button class="nav-item active" onclick="showPage('dashboard')">📊 Dashboard</button>
@@ -127,452 +115,155 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <button class="nav-item" onclick="adminLogout()" style="color:var(--red)">🚪 Logout</button>
   </div>
 
-  <!-- MAIN CONTENT -->
   <div class="main">
-
-    <!-- DASHBOARD -->
     <div class="page on" id="pg-dashboard">
       <div class="page-title">Dashboard</div>
-
       <div class="stat-grid">
-        <div class="stat-card">
-          <div class="stat-label">DaisySMS Balance</div>
-          <div class="stat-val green" id="daisyBal">...</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Total Users</div>
-          <div class="stat-val purple" id="totalUsers">...</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Total Orders</div>
-          <div class="stat-val yellow" id="totalOrders">...</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Total Revenue</div>
-          <div class="stat-val green" id="totalRevenue">...</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Pending Orders</div>
-          <div class="stat-val yellow" id="pendingOrders">...</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Total Balance Held</div>
-          <div class="stat-val purple" id="totalBalHeld">...</div>
-        </div>
+        <div class="stat-card"><div class="stat-label">DaisySMS Balance</div><div class="stat-val green" id="daisyBal">...</div></div>
+        <div class="stat-card"><div class="stat-label">Total Users</div><div class="stat-val purple" id="totalUsers">...</div></div>
+        <div class="stat-card"><div class="stat-label">Total Orders</div><div class="stat-val yellow" id="totalOrders">...</div></div>
+        <div class="stat-card"><div class="stat-label">Total Revenue</div><div class="stat-val green" id="totalRevenue">...</div></div>
+        <div class="stat-card"><div class="stat-label">Pending Orders</div><div class="stat-val yellow" id="pendingOrders">...</div></div>
+        <div class="stat-card"><div class="stat-label">Total Balance Held</div><div class="stat-val purple" id="totalBalHeld">...</div></div>
       </div>
 
-      <!-- Recent orders -->
       <div class="table-wrap">
-        <div class="table-head">
-          <h3>Recent Orders</h3>
-          <button class="refresh-btn" onclick="loadDashboard()">↻ Refresh</button>
-        </div>
+        <div class="table-head"><h3>Recent Orders</h3><button class="refresh-btn" onclick="loadDashboard()">↻ Refresh</button></div>
         <div style="overflow-x:auto">
           <table>
-            <thead><tr>
-              <th>Order ID</th><th>Email</th><th>Service</th>
-              <th>Phone</th><th>Price</th><th>Status</th><th>Time</th>
-            </tr></thead>
+            <thead><tr><th>Order ID</th><th>Email</th><th>Service</th><th>Phone</th><th>Price</th><th>Status</th><th>Time</th></tr></thead>
             <tbody id="recentOrdersBody"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- USERS -->
     <div class="page" id="pg-users">
       <div class="page-title">Users</div>
       <div class="table-wrap">
-        <div class="table-head">
-          <h3>All Users</h3>
-          <button class="refresh-btn" onclick="loadUsers()">↻ Refresh</button>
-        </div>
+        <div class="table-head"><h3>All Users</h3><button class="refresh-btn" onclick="loadUsers()">↻ Refresh</button></div>
         <div style="overflow-x:auto">
           <table>
-            <thead><tr>
-              <th>Name</th><th>Email</th><th>Balance</th><th>Joined</th><th>Action</th>
-            </tr></thead>
+            <thead><tr><th>Name</th><th>Email</th><th>Balance</th><th>Joined</th><th>Action</th></tr></thead>
             <tbody id="usersBody"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- ORDERS -->
     <div class="page" id="pg-orders">
       <div class="page-title">All Orders</div>
-      <div style="display:flex;gap:.8rem;margin-bottom:1rem;flex-wrap:wrap">
-        <button class="refresh-btn" style="padding:8px 16px" onclick="loadOrders('all')">All</button>
-        <button class="refresh-btn" style="padding:8px 16px" onclick="loadOrders('waiting')">⏳ Waiting</button>
-        <button class="refresh-btn" style="padding:8px 16px" onclick="loadOrders('received')">✅ Received</button>
-        <button class="refresh-btn" style="padding:8px 16px" onclick="loadOrders('cancelled')">❌ Cancelled</button>
-      </div>
       <div class="table-wrap">
-        <div class="table-head">
-          <h3>Orders</h3>
-          <button class="refresh-btn" onclick="loadOrders('all')">↻ Refresh</button>
-        </div>
+        <div class="table-head"><h3>Orders</h3><button class="refresh-btn" onclick="loadOrders()">↻ Refresh</button></div>
         <div style="overflow-x:auto">
           <table>
-            <thead><tr>
-              <th>Order ID</th><th>Email</th><th>Service</th>
-              <th>Phone</th><th>Code</th><th>Price</th><th>Status</th><th>Time</th>
-            </tr></thead>
+            <thead><tr><th>Order ID</th><th>Email</th><th>Service</th><th>Phone</th><th>Code</th><th>Price</th><th>Status</th><th>Time</th></tr></thead>
             <tbody id="ordersBody"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- ADD BALANCE -->
     <div class="page" id="pg-topup">
       <div class="page-title">Add Balance to User</div>
       <div class="form-card">
         <h3>💰 Manual Balance Top-up</h3>
-        <p style="font-size:.82rem;color:var(--text2);margin-bottom:1.2rem">Bkash/Nagad payment confirm করার পর এখান থেকে user এর balance add করো।</p>
-        <div class="fgroup">
-          <label class="flabel">User Email</label>
-          <input type="email" class="form-input" id="topupEmail" placeholder="customer@email.com">
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Amount (BDT ৳)</label>
-          <input type="number" class="form-input" id="topupAmount" placeholder="e.g. 100" min="1">
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Note (optional)</label>
-          <input type="text" class="form-input" id="topupNote" placeholder="e.g. Bkash TxID 1234">
-        </div>
+        <p style="font-size:.82rem;color:var(--text2);margin-bottom:1.2rem">ক্রিপ্টো ছাড়া অন্য মাধ্যমে কাস্টমার পে করলে এখান থেকে ব্যালেন্স অ্যাড করুন।</p>
+        <div class="fgroup"><label class="flabel">User Email</label><input type="email" class="form-input" id="topupEmail" placeholder="customer@email.com"></div>
+        <div class="fgroup"><label class="flabel">Amount (Naira ₦)</label><input type="number" class="form-input" id="topupAmount" placeholder="e.g. 5000" min="1"></div>
         <button class="submit-btn" onclick="addBalance()">✓ Add Balance</button>
         <div class="smsg" id="topupMsg" style="margin-top:.6rem"></div>
       </div>
-
-      <div style="margin-top:2rem">
-        <h3 style="font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:1rem">Quick Add by Clicking User</h3>
-        <div class="table-wrap">
-          <div class="table-head"><h3>Users</h3><button class="refresh-btn" onclick="loadTopupUsers()">↻</button></div>
-          <div style="overflow-x:auto">
-            <table>
-              <thead><tr><th>Name</th><th>Email</th><th>Balance</th><th>Quick Add</th></tr></thead>
-              <tbody id="topupUsersBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- SETTINGS -->
     <div class="page" id="pg-settings">
       <div class="page-title">Settings Info</div>
-
       <div class="daisy-card">
         <div class="daisy-bal" id="settingsDaisyBal">...</div>
         <div class="daisy-lbl">DaisySMS Balance (USD)</div>
         <button class="refresh-btn" style="margin-top:.8rem" onclick="loadDaisyBal()">↻ Refresh</button>
       </div>
-
-      <div class="settings-card">
-        <h3>⚙️ Current Configuration</h3>
-        <p style="font-size:.8rem;color:var(--text3);margin-bottom:1rem">এই settings change করতে Render.com এ গিয়ে Environment Variables update করো অথবা app.py এ directly change করো।</p>
-        <div class="setting-row">
-          <span class="setting-label">Markup Mode</span>
-          <span class="setting-val" id="cfgMarkupMode">–</span>
-        </div>
-        <div class="setting-row">
-          <span class="setting-label">Markup Amount</span>
-          <span class="setting-val" id="cfgMarkupAmt">–</span>
-        </div>
-        <div class="setting-row">
-          <span class="setting-label">Min Price (BDT)</span>
-          <span class="setting-val" id="cfgMinPrice">–</span>
-        </div>
-        <div class="setting-row">
-          <span class="setting-label">USD → BDT Rate</span>
-          <span class="setting-val" id="cfgRate">–</span>
-        </div>
-        <div class="setting-row">
-          <span class="setting-label">Bkash Number</span>
-          <span class="setting-val" id="cfgBkash">–</span>
-        </div>
-        <div class="setting-row">
-          <span class="setting-label">Nagad Number</span>
-          <span class="setting-val" id="cfgNagad">–</span>
-        </div>
-      </div>
-
-      <div class="settings-card">
-        <h3>📝 How to Change Markup</h3>
-        <p style="font-size:.83rem;color:var(--text2);line-height:1.7">
-          <code style="background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--accent)">app.py</code> এর শুরুতে এই variables change করো:<br><br>
-          <code style="background:var(--bg3);padding:8px 12px;border-radius:7px;display:block;color:var(--green);margin:.5rem 0;font-size:.82rem;line-height:1.8">
-            MARKUP_MODE = "percent"  # বা "fixed"<br>
-            MARKUP_AMOUNT = 100  # 100% মানে double price<br>
-            MIN_PRICE_BDT = 25   # সর্বনিম্ন ৳25<br>
-            USD_TO_BDT = 110     # exchange rate
-          </code>
-          Change করার পর Render.com এ redeploy হবে automatically।
-        </p>
-      </div>
     </div>
-
-  </div><!-- /main -->
-</div><!-- /adminApp -->
+  </div>
+</div>
 
 <script>
-// ════════════════════════════════════════════
-//  CONFIG
-// ════════════════════════════════════════════
-const API = "https://usaverify-backend.onrender.com";  // ← same as index.html
+const API = "https://usaverify-backend.onrender.com";
 let adminPwd = "";
 
-// ════════════════════════════════════════════
-//  LOGIN
-// ════════════════════════════════════════════
 function adminLogin() {
-  const pwd = document.getElementById("adminPwd").value.trim();
-  if(!pwd) return;
-  adminPwd = pwd;
-
-  // Test with a protected endpoint
-  fetch(`${API}/admin/daisy_balance`, {
-    headers: { "X-Admin-Password": adminPwd }
-  })
-  .then(r => r.json())
-  .then(j => {
-    if(j.ok) {
-      document.getElementById("loginWrap").style.display = "none";
-      document.getElementById("adminApp").style.display  = "block";
-      loadDashboard();
-    } else {
-      document.getElementById("loginErr").textContent = "Wrong password!";
-      document.getElementById("loginErr").className   = "smsg err";
-    }
-  })
-  .catch(() => {
-    document.getElementById("loginErr").textContent = "Cannot connect to server.";
-    document.getElementById("loginErr").className   = "smsg err";
-  });
+  const pwd = document.getElementById("adminPwd").value.trim(); if(!pwd) return; adminPwd = pwd;
+  fetch(`${API}/admin/daisy_balance`, { headers: { "X-Admin-Password": adminPwd } })
+  .then(r => r.json()).then(j => {
+    if(j.ok) { document.getElementById("loginWrap").style.display = "none"; document.getElementById("adminApp").style.display = "block"; loadDashboard(); }
+    else { document.getElementById("loginErr").textContent = "Wrong password!"; document.getElementById("loginErr").className = "smsg err"; }
+  }).catch(() => { document.getElementById("loginErr").textContent = "Connection error."; document.getElementById("loginErr").className = "smsg err"; });
 }
 
-function adminLogout() {
-  adminPwd = "";
-  document.getElementById("loginWrap").style.display = "flex";
-  document.getElementById("adminApp").style.display  = "none";
-  document.getElementById("adminPwd").value = "";
-}
+function adminLogout() { adminPwd = ""; document.getElementById("loginWrap").style.display = "flex"; document.getElementById("adminApp").style.display = "none"; }
+document.getElementById("adminPwd").addEventListener("keydown", e => { if(e.key === "Enter") adminLogin(); });
 
-document.getElementById("adminPwd").addEventListener("keydown", e => {
-  if(e.key === "Enter") adminLogin();
-});
-
-// ════════════════════════════════════════════
-//  NAVIGATION
-// ════════════════════════════════════════════
 function showPage(name) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("on"));
-  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
   document.getElementById("pg-"+name).classList.add("on");
-  event.currentTarget.classList.add("active");
-
-  if(name==="users")    loadUsers();
-  if(name==="orders")   loadOrders("all");
-  if(name==="topup")    loadTopupUsers();
-  if(name==="settings") { loadDaisyBal(); loadConfig(); }
+  if(name==="users") loadUsers(); if(name==="orders") loadOrders(); if(name==="settings") loadDaisyBal();
 }
 
-// ════════════════════════════════════════════
-//  HELPERS
-// ════════════════════════════════════════════
-function authHeaders() {
-  return { "Content-Type":"application/json", "X-Admin-Password": adminPwd };
-}
+function authHeaders() { return { "Content-Type":"application/json", "X-Admin-Password": adminPwd }; }
+function fmtDate(iso) { if(!iso) return "–"; const d = new Date(iso); return d.toLocaleDateString("en-GB") + " " + d.toLocaleTimeString("en-GB", {hour:"2-digit",minute:"2-digit"}); }
+function statusBadge(s) { return `<span class="badge ${s==='received'?'badge-green':s==='waiting'?'badge-yellow':'badge-red'}">${s.toUpperCase()}</span>`; }
 
-function fmtDate(iso) {
-  if(!iso) return "–";
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-GB") + " " + d.toLocaleTimeString("en-GB", {hour:"2-digit",minute:"2-digit"});
-}
-
-function statusBadge(s) {
-  if(s==="received")  return `<span class="badge badge-green">✅ Received</span>`;
-  if(s==="waiting")   return `<span class="badge badge-yellow">⏳ Waiting</span>`;
-  if(s==="cancelled") return `<span class="badge badge-red">❌ Cancelled</span>`;
-  return `<span class="badge badge-purple">${s}</span>`;
-}
-
-function setMsg(id, text, type="ok") {
-  const el = document.getElementById(id);
-  if(!el) return;
-  el.textContent = text;
-  el.className = "smsg " + type;
-}
-
-// ════════════════════════════════════════════
-//  DASHBOARD
-// ════════════════════════════════════════════
 async function loadDashboard() {
-  // DaisySMS balance
   const db = await fetch(`${API}/admin/daisy_balance`, {headers: authHeaders()}).then(r=>r.json());
   document.getElementById("daisyBal").textContent = db.ok ? "$"+parseFloat(db.daisy_balance_usd).toFixed(2) : "Error";
 
-  // Users + Orders
   const [ur, or_] = await Promise.all([
     fetch(`${API}/admin/users`,  {headers: authHeaders()}).then(r=>r.json()),
     fetch(`${API}/admin/orders`, {headers: authHeaders()}).then(r=>r.json())
   ]);
 
   if(ur.ok) {
-    document.getElementById("totalUsers").textContent   = ur.users.length;
-    const totalBal = ur.users.reduce((s,u) => s+(u.balance||0), 0);
-    document.getElementById("totalBalHeld").textContent = "৳"+totalBal;
+    document.getElementById("totalUsers").textContent = ur.users.length;
+    document.getElementById("totalBalHeld").textContent = "₦" + ur.users.reduce((s,u) => s+(u.balance||0), 0).toLocaleString();
   }
-
   if(or_.ok) {
-    const orders = or_.orders;
-    document.getElementById("totalOrders").textContent = orders.length;
-    const revenue = orders.filter(o=>o.status!=="cancelled").reduce((s,o)=>s+(o.price_bdt||0),0);
-    document.getElementById("totalRevenue").textContent = "৳"+revenue;
-    const pending = orders.filter(o=>o.status==="waiting").length;
-    document.getElementById("pendingOrders").textContent = pending;
-
-    // Recent 10 orders
-    const recent = [...orders].sort((a,b) => new Date(b.created_at)-new Date(a.created_at)).slice(0,10);
-    document.getElementById("recentOrdersBody").innerHTML = recent.map(o => `
-      <tr>
-        <td style="font-family:monospace;font-size:.75rem;color:var(--text3)">${o.order_id||"–"}</td>
-        <td>${o.email}</td>
-        <td>${o.service}</td>
-        <td style="font-family:monospace">${o.phone||"–"}</td>
-        <td style="color:var(--green);font-weight:600">৳${o.price_bdt||0}</td>
-        <td>${statusBadge(o.status)}</td>
-        <td style="color:var(--text3);font-size:.75rem">${fmtDate(o.created_at)}</td>
-      </tr>
+    document.getElementById("totalOrders").textContent = or_.orders.length;
+    document.getElementById("totalRevenue").textContent = "₦" + or_.orders.filter(o=>o.status!=="cancelled").reduce((s,o)=>s+(o.price_ngn||0),0).toLocaleString();
+    document.getElementById("pendingOrders").textContent = or_.orders.filter(o=>o.status==="waiting").length;
+    document.getElementById("recentOrdersBody").innerHTML = or_.orders.slice(0,10).map(o => `
+      <tr><td>${o.order_id||"–"}</td><td>${o.email}</td><td>${o.service_name||o.service}</td><td>${o.phone||"–"}</td><td>₦${o.price_ngn||0}</td><td>${statusBadge(o.status)}</td><td>${fmtDate(o.created_at)}</td></tr>
     `).join("");
   }
 }
 
-// ════════════════════════════════════════════
-//  USERS
-// ════════════════════════════════════════════
 async function loadUsers() {
-  const r = await fetch(`${API}/admin/users`, {headers: authHeaders()});
-  const j = await r.json();
-  if(!j.ok) return;
+  const r = await fetch(`${API}/admin/users`, {headers: authHeaders()}); const j = await r.json(); if(!j.ok) return;
   document.getElementById("usersBody").innerHTML = j.users.map(u => `
-    <tr>
-      <td>${u.name}</td>
-      <td>${u.email}</td>
-      <td><span style="color:var(--green);font-weight:700">৳${u.balance||0}</span></td>
-      <td style="color:var(--text3);font-size:.75rem">${fmtDate(u.created_at)}</td>
-      <td>
-        <button onclick="quickTopup('${u.email}')" style="background:var(--gdim);border:1px solid rgba(0,229,160,.2);border-radius:6px;padding:5px 10px;color:var(--green);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif">+ Add Balance</button>
-      </td>
-    </tr>
+    <tr><td>${u.name}</td><td>${u.email}</td><td>₦${u.balance||0}</td><td>${fmtDate(u.created_at)}</td><td><button onclick="quickTopup('${u.email}')">Add Bal</button></td></tr>
+  `).join("");
+}
+function quickTopup(email) { showPage("topup"); document.getElementById("topupEmail").value = email; }
+
+async function loadOrders() {
+  const r = await fetch(`${API}/admin/orders`, {headers: authHeaders()}); const j = await r.json(); if(!j.ok) return;
+  document.getElementById("ordersBody").innerHTML = j.orders.map(o => `
+    <tr><td>${o.order_id||"–"}</td><td>${o.email}</td><td>${o.service_name||o.service}</td><td>${o.phone||"–"}</td><td>${o.sms_code||"–"}</td><td>₦${o.price_ngn||0}</td><td>${statusBadge(o.status)}</td><td>${fmtDate(o.created_at)}</td></tr>
   `).join("");
 }
 
-function quickTopup(email) {
-  showPage("topup");
-  document.getElementById("topupEmail").value = email;
-  document.getElementById("topupAmount").focus();
-}
-
-// ════════════════════════════════════════════
-//  ORDERS
-// ════════════════════════════════════════════
-async function loadOrders(filter="all") {
-  const r = await fetch(`${API}/admin/orders`, {headers: authHeaders()});
-  const j = await r.json();
-  if(!j.ok) return;
-
-  let orders = j.orders;
-  if(filter !== "all") orders = orders.filter(o => o.status === filter);
-  orders.sort((a,b) => new Date(b.created_at)-new Date(a.created_at));
-
-  document.getElementById("ordersBody").innerHTML = orders.map(o => `
-    <tr>
-      <td style="font-family:monospace;font-size:.75rem;color:var(--text3)">${o.order_id||"–"}</td>
-      <td>${o.email}</td>
-      <td>${o.service}</td>
-      <td style="font-family:monospace">${o.phone||"–"}</td>
-      <td style="font-family:monospace;color:var(--green);font-weight:700">${o.sms_code||"–"}</td>
-      <td style="color:var(--green);font-weight:600">৳${o.price_bdt||0}</td>
-      <td>${statusBadge(o.status)}</td>
-      <td style="color:var(--text3);font-size:.75rem">${fmtDate(o.created_at)}</td>
-    </tr>
-  `).join("");
-}
-
-// ════════════════════════════════════════════
-//  ADD BALANCE
-// ════════════════════════════════════════════
 async function addBalance() {
-  const email  = document.getElementById("topupEmail").value.trim().toLowerCase();
-  const amount = parseInt(document.getElementById("topupAmount").value);
-  const note   = document.getElementById("topupNote").value.trim();
+  const email = document.getElementById("topupEmail").value.trim().toLowerCase();
+  const amount = parseFloat(document.getElementById("topupAmount").value);
+  if(!email || !amount) return;
 
-  if(!email || !amount || amount < 1) {
-    setMsg("topupMsg","Email ও amount দাও","err"); return;
-  }
-
-  const r = await fetch(`${API}/admin/add_balance`, {
-    method:"POST",
-    headers: authHeaders(),
-    body: JSON.stringify({ email, amount, note })
-  });
+  const r = await fetch(`${API}/admin/add_balance`, { method:"POST", headers: authHeaders(), body: JSON.stringify({ email, amount }) });
   const j = await r.json();
-
-  if(j.ok) {
-    setMsg("topupMsg", `✓ ${j.message} | New balance: ৳${j.new_balance}`, "ok");
-    document.getElementById("topupAmount").value = "";
-    document.getElementById("topupNote").value   = "";
-    loadTopupUsers();
-  } else {
-    setMsg("topupMsg", j.error || "Error", "err");
-  }
+  if(j.ok) { document.getElementById("topupMsg").textContent = "Balance Added!"; document.getElementById("topupAmount").value=""; }
 }
 
-async function loadTopupUsers() {
-  const r = await fetch(`${API}/admin/users`, {headers: authHeaders()});
-  const j = await r.json();
-  if(!j.ok) return;
-  document.getElementById("topupUsersBody").innerHTML = j.users.map(u => `
-    <tr>
-      <td>${u.name}</td>
-      <td>${u.email}</td>
-      <td><span style="color:var(--green);font-weight:700">৳${u.balance||0}</span></td>
-      <td>
-        <button onclick="document.getElementById('topupEmail').value='${u.email}';document.getElementById('topupAmount').focus()"
-          style="background:var(--gdim);border:1px solid rgba(0,229,160,.2);border-radius:6px;padding:5px 10px;color:var(--green);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif">
-          Select
-        </button>
-      </td>
-    </tr>
-  `).join("");
-}
-
-// ════════════════════════════════════════════
-//  SETTINGS / DAISY BAL
-// ════════════════════════════════════════════
 async function loadDaisyBal() {
-  const r = await fetch(`${API}/admin/daisy_balance`, {headers: authHeaders()});
-  const j = await r.json();
-  const val = j.ok ? "$"+parseFloat(j.daisy_balance_usd).toFixed(2) : "Error";
-  document.getElementById("settingsDaisyBal").textContent = val;
-}
-
-async function loadConfig() {
-  // We fetch payment info to show config hints
-  const r = await fetch(`${API}/api/payment_info`);
-  const j = await r.json();
-  if(j.ok) {
-    document.getElementById("cfgBkash").textContent = j.bkash;
-    document.getElementById("cfgNagad").textContent = j.nagad;
-  }
-  // These are hardcoded hints — actual values are in app.py
-  document.getElementById("cfgMarkupMode").textContent = "See app.py";
-  document.getElementById("cfgMarkupAmt").textContent  = "See app.py";
-  document.getElementById("cfgMinPrice").textContent   = "See app.py";
-  document.getElementById("cfgRate").textContent       = "See app.py";
+  const r = await fetch(`${API}/admin/daisy_balance`, {headers: authHeaders()}); const j = await r.json();
+  document.getElementById("settingsDaisyBal").textContent = j.ok ? "$"+j.daisy_balance_usd : "Error";
 }
 </script>
 </body>
