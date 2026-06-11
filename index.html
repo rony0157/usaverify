@@ -930,6 +930,12 @@ async function markOrderDone(){
 }
 function resetOrderPanel(){
   stopPolling();
+  if(orderSt.activationId && orderSt.orderId){
+    fetch(`${API}/api/cancel`,{method:"POST",headers:authH(),body:JSON.stringify({order_id:orderSt.orderId})})
+    .then(r=>r.json()).then(j=>{
+      if(j.ok){appUser.balance+=j.refunded;updateSidebar();loadUserData();}
+    });
+  }
   orderSt.orderId=null;orderSt.activationId=null;orderSt.phone=null;orderSt.elapsed=0;orderSt.service="";
   document.querySelectorAll(".app-svc-card").forEach(c=>c.classList.remove("selected"));
   document.getElementById("orderPanel").style.display="none";
