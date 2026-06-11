@@ -916,25 +916,12 @@ async function doPoll(){
 function stopPolling(){clearInterval(orderSt.pollTimer);clearInterval(orderSt.countdownTimer);orderSt.pollTimer=null;orderSt.countdownTimer=null}
 
 async function cancelCurrentOrder(){
-  if(!orderSt.orderId){resetOrderPanel();return}
-  try{
-    const j=await fetch(`${API}/api/cancel`,{method:"POST",headers:authH(),body:JSON.stringify({order_id:orderSt.orderId})}).then(r=>r.json());
-    if(j.ok){appUser.balance+=j.refunded;updateSidebar()}
-  }catch(e){}
-  resetOrderPanel();
-}
-async function cancelFromWait(){stopPolling();await cancelCurrentOrder()}
-async function markOrderDone(){
-  if(orderSt.activationId){try{await fetch(`${API}/api/mark_done`,{method:"POST",headers:authH(),body:JSON.stringify({activation_id:orderSt.activationId})})}catch(e){}}
-  loadUserData();resetOrderPanel();
-}
-function resetOrderPanel(){
   stopPolling();
-  if(orderSt.activationId && orderSt.orderId){
-    fetch(`${API}/api/cancel`,{method:"POST",headers:authH(),body:JSON.stringify({order_id:orderSt.orderId})})
-    .then(r=>r.json()).then(j=>{
+  if(orderSt.orderId){
+    try{
+      const j=await fetch(`${API}/api/cancel`,{method:"POST",headers:authH(),body:JSON.stringify({order_id:orderSt.orderId})}).then(r=>r.json());
       if(j.ok){appUser.balance+=j.refunded;updateSidebar();loadUserData();}
-    });
+    }catch(e){}
   }
   orderSt.orderId=null;orderSt.activationId=null;orderSt.phone=null;orderSt.elapsed=0;orderSt.service="";
   document.querySelectorAll(".app-svc-card").forEach(c=>c.classList.remove("selected"));
@@ -942,6 +929,14 @@ function resetOrderPanel(){
   showOpPane(1);setMsg("op1msg","","info");
   document.getElementById("waitDiv").style.display="block";
   document.getElementById("codeDiv").style.display="none";
+}
+async function cancelFromWait(){stopPolling();await cancelCurrentOrder();}
+async function markOrderDone(){
+  if(orderSt.activationId){try{await fetch(`${API}/api/mark_done`,{method:"POST",headers:authH(),body:JSON.stringify({activation_id:orderSt.activationId})})}catch(e){}}
+  loadUserData();await cancelCurrentOrder();
+}
+function resetOrderPanel(){
+  cancelCurrentOrder();
 }
 
 // ── TOPUP ──
