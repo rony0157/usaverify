@@ -464,21 +464,41 @@ async function loadDashboard() {
 // ════════════════════════════════════════════
 //  USERS
 // ════════════════════════════════════════════
+let allUsers = [];
+
 async function loadUsers() {
   const r = await fetch(`${API}/admin/users`, {headers: authHeaders()});
   const j = await r.json();
   if(!j.ok) return;
-  document.getElementById("usersBody").innerHTML = j.users.map(u => `
+  allUsers = j.users;
+  renderUsers(allUsers);
+}
+
+function searchUsers() {
+  const q = document.getElementById("userSearchInput").value.toLowerCase().trim();
+  if(!q){ renderUsers(allUsers); return; }
+  const filtered = allUsers.filter(u =>
+    u.email.toLowerCase().includes(q) ||
+    u.name.toLowerCase().includes(q)
+  );
+  renderUsers(filtered);
+}
+
+function renderUsers(users) {
+  document.getElementById("usersBody").innerHTML = users.map(u => `
     <tr>
       <td>${u.name}</td>
       <td>${u.email}</td>
-      <td><span style="color:var(--green);font-weight:700">৳${u.balance||0}</span></td>
+      <td><span style="color:var(--green);font-weight:700">₦${u.balance||0}</span></td>
       <td style="color:var(--text3);font-size:.75rem">${fmtDate(u.created_at)}</td>
       <td>
-        <button onclick="quickTopup('${u.email}')" style="background:var(--gdim);border:1px solid rgba(0,229,160,.2);border-radius:6px;padding:5px 10px;color:var(--green);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif">+ Add Balance</button>
+        <button onclick="quickTopup('${u.email}')"
+          style="background:var(--gdim);border:1px solid rgba(0,229,160,.2);border-radius:6px;padding:5px 10px;color:var(--green);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif">
+          + Add Balance
+        </button>
       </td>
     </tr>
-  `).join("");
+  `).join("") || `<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:1.5rem">No users found</td></tr>`;
 }
 
 function quickTopup(email) {
