@@ -187,6 +187,17 @@ tr:hover td{background:rgba(255,255,255,.02)}
           <h3>All Users</h3>
           <button class="refresh-btn" onclick="loadUsers()">↻ Refresh</button>
         </div>
+        
+        <div class="table-head">
+  <h3>All Users</h3>
+  <div style="display:flex;gap:8px;align-items:center">
+    <input type="text" id="userSearchInput" placeholder="Search email or name..."
+      style="background:var(--bg3);border:1px solid var(--border2);border-radius:7px;padding:6px 12px;color:var(--text);font-size:.78rem;outline:none;width:200px"
+      oninput="searchUsers()">
+    <button class="refresh-btn" onclick="loadUsers()">↻ Refresh</button>
+  </div>
+</div>
+        
         <div style="overflow-x:auto">
           <table>
             <thead><tr>
