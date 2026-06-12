@@ -920,7 +920,7 @@ async function cancelCurrentOrder(){
   if(orderSt.orderId){
     try{
       const j=await fetch(`${API}/api/cancel`,{method:"POST",headers:authH(),body:JSON.stringify({order_id:orderSt.orderId})}).then(r=>r.json());
-      if(j.ok){appUser.balance+=j.refunded;updateSidebar();loadUserData();}
+      if(j.ok){loadUserData();}
     }catch(e){}
   }
   orderSt.orderId=null;orderSt.activationId=null;orderSt.phone=null;orderSt.elapsed=0;orderSt.service="";
