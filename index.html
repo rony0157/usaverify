@@ -929,9 +929,11 @@ async function rentNumber(){
       document.getElementById("op2num").textContent=j.phone;
       document.getElementById("op2svc").textContent=orderSt.serviceLabel;
       document.getElementById("op2svc2").textContent=orderSt.serviceLabel;
+      document.getElementById("waitNum").textContent=j.phone;
       document.getElementById("waitDiv").style.display="block";
       document.getElementById("codeDiv").style.display="none";
-      showOpPane(2);
+      showOpPane(3);
+      startPolling();
     }else setMsg("op1msg",j.error,"err");
   }catch(e){setMsg("op1msg","Connection error. Try again.","err")}
   btnLoad("rentBtn",false,"⚡ Rent Number Now");
