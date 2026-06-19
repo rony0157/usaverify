@@ -122,6 +122,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <button class="nav-item" onclick="showPage('users')">👥 Users</button>
     <button class="nav-item" onclick="showPage('orders')">📋 Orders</button>
     <button class="nav-item" onclick="showPage('topup')">💰 Add Balance</button>
+    <button class="nav-item" onclick="showPage('store')">🛍️ Store</button>
     <button class="nav-item" onclick="showPage('settings')">⚙️ Settings</button>
     <div style="flex:1"></div>
     <button class="nav-item" onclick="adminLogout()" style="color:var(--red)">🚪 Logout</button>
@@ -268,6 +269,47 @@ tr:hover td{background:rgba(255,255,255,.02)}
       </div>
     </div>
 
+    <!-- DIGITAL STORE ADMIN -->
+    <div class="page" id="pg-store">
+      <div class="page-title">🛍️ Store Manager</div>
+
+      <!-- Add Product Form -->
+      <div class="form-card" style="max-width:100%;margin-bottom:2rem">
+        <h3>➕ Add New Product</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="fgroup"><label class="flabel">Product Name</label><input class="form-input" id="prodName" placeholder="Windows 11 Pro Key"></div>
+          <div class="fgroup"><label class="flabel">Category</label>
+            <select class="form-input" id="prodCategory">
+              <option value="software">💻 Software</option>
+              <option value="ebook">📚 E-book</option>
+              <option value="template">📄 Template</option>
+              <option value="other">📦 Other</option>
+            </select>
+          </div>
+          <div class="fgroup"><label class="flabel">Price (NGN)</label><input type="number" class="form-input" id="prodPrice" placeholder="2500"></div>
+          <div class="fgroup"><label class="flabel">Stock</label><input type="number" class="form-input" id="prodStock" placeholder="50"></div>
+        </div>
+        <div class="fgroup"><label class="flabel">Description</label><input class="form-input" id="prodDesc" placeholder="Lifetime license key for Windows 11 Pro"></div>
+        <div class="fgroup"><label class="flabel">File URL (optional)</label><input class="form-input" id="prodFile" placeholder="https://.../file.zip"></div>
+        <div class="fgroup"><label class="flabel">License Keys (comma separated)</label>
+          <input class="form-input" id="prodKeys" placeholder="KEY-1234-ABCD, KEY-5678-EFGH">
+        </div>
+        <button class="submit-btn" onclick="createProduct()">✓ Add Product</button>
+        <div class="smsg" id="prodMsg"></div>
+      </div>
+
+      <!-- Product List -->
+      <div class="table-wrap">
+        <div class="table-head"><h3>All Products</h3><button class="refresh-btn" onclick="loadStoreProducts()">↻</button></div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="storeProductsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     <!-- SETTINGS -->
     <div class="page" id="pg-settings">
       <div class="page-title">Settings Info</div>
@@ -329,7 +371,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 // ════════════════════════════════════════════
 //  CONFIG
 // ════════════════════════════════════════════
-const API = "https://usaverify-backend.onrender.com";  // ← same as index.html
+const API = "https://usaverify-backend.onrender.com";
 let adminPwd = "";
 
 // ════════════════════════════════════════════
@@ -340,7 +382,6 @@ function adminLogin() {
   if(!pwd) return;
   adminPwd = pwd;
 
-  // Test with a protected endpoint
   fetch(`${API}/admin/daisy_balance`, {
     headers: { "X-Admin-Password": adminPwd }
   })
@@ -385,6 +426,7 @@ function showPage(name) {
   if(name==="orders")   loadOrders("all");
   if(name==="topup")    loadTopupUsers();
   if(name==="settings") { loadDaisyBal(); loadConfig(); }
+  if(name==="store")    loadStoreProducts();
 }
 
 // ════════════════════════════════════════════
@@ -418,11 +460,9 @@ function setMsg(id, text, type="ok") {
 //  DASHBOARD
 // ════════════════════════════════════════════
 async function loadDashboard() {
-  // DaisySMS balance
   const db = await fetch(`${API}/admin/daisy_balance`, {headers: authHeaders()}).then(r=>r.json());
   document.getElementById("daisyBal").textContent = db.ok ? "$"+parseFloat(db.daisy_balance_usd).toFixed(2) : "Error";
 
-  // Users + Orders
   const [ur, or_] = await Promise.all([
     fetch(`${API}/admin/users`,  {headers: authHeaders()}).then(r=>r.json()),
     fetch(`${API}/admin/orders`, {headers: authHeaders()}).then(r=>r.json())
@@ -431,18 +471,17 @@ async function loadDashboard() {
   if(ur.ok) {
     document.getElementById("totalUsers").textContent   = ur.users.length;
     const totalBal = ur.users.reduce((s,u) => s+(u.balance||0), 0);
-    document.getElementById("totalBalHeld").textContent = "৳"+totalBal;
+    document.getElementById("totalBalHeld").textContent = "₦"+totalBal;
   }
 
   if(or_.ok) {
     const orders = or_.orders;
     document.getElementById("totalOrders").textContent = orders.length;
-    const revenue = orders.filter(o=>o.status!=="cancelled").reduce((s,o)=>s+(o.price_bdt||0),0);
-    document.getElementById("totalRevenue").textContent = "৳"+revenue;
+    const revenue = orders.filter(o=>o.status!=="cancelled").reduce((s,o)=>s+(o.price_ngn||0),0);
+    document.getElementById("totalRevenue").textContent = "₦"+revenue;
     const pending = orders.filter(o=>o.status==="waiting").length;
     document.getElementById("pendingOrders").textContent = pending;
 
-    // Recent 10 orders
     const recent = [...orders].sort((a,b) => new Date(b.created_at)-new Date(a.created_at)).slice(0,10);
     document.getElementById("recentOrdersBody").innerHTML = recent.map(o => `
       <tr>
@@ -450,7 +489,7 @@ async function loadDashboard() {
         <td>${o.email}</td>
         <td>${o.service}</td>
         <td style="font-family:monospace">${o.phone||"–"}</td>
-        <td style="color:var(--green);font-weight:600">৳${o.price_bdt||0}</td>
+        <td style="color:var(--green);font-weight:600">₦${o.price_ngn||0}</td>
         <td>${statusBadge(o.status)}</td>
         <td style="color:var(--text3);font-size:.75rem">${fmtDate(o.created_at)}</td>
       </tr>
@@ -523,7 +562,7 @@ async function loadOrders(filter="all") {
       <td>${o.service}</td>
       <td style="font-family:monospace">${o.phone||"–"}</td>
       <td style="font-family:monospace;color:var(--green);font-weight:700">${o.sms_code||"–"}</td>
-      <td style="color:var(--green);font-weight:600">৳${o.price_bdt||0}</td>
+      <td style="color:var(--green);font-weight:600">₦${o.price_ngn||0}</td>
       <td>${statusBadge(o.status)}</td>
       <td style="color:var(--text3);font-size:.75rem">${fmtDate(o.created_at)}</td>
     </tr>
@@ -550,7 +589,7 @@ async function addBalance() {
   const j = await r.json();
 
   if(j.ok) {
-    setMsg("topupMsg", `✓ ${j.message} | New balance: ৳${j.new_balance}`, "ok");
+    setMsg("topupMsg", `✓ ${j.message} | New balance: ₦${j.new_balance}`, "ok");
     document.getElementById("topupAmount").value = "";
     document.getElementById("topupNote").value   = "";
     loadTopupUsers();
@@ -567,7 +606,7 @@ async function loadTopupUsers() {
     <tr>
       <td>${u.name}</td>
       <td>${u.email}</td>
-      <td><span style="color:var(--green);font-weight:700">৳${u.balance||0}</span></td>
+      <td><span style="color:var(--green);font-weight:700">₦${u.balance||0}</span></td>
       <td>
         <button onclick="document.getElementById('topupEmail').value='${u.email}';document.getElementById('topupAmount').focus()"
           style="background:var(--gdim);border:1px solid rgba(0,229,160,.2);border-radius:6px;padding:5px 10px;color:var(--green);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif">
@@ -589,18 +628,94 @@ async function loadDaisyBal() {
 }
 
 async function loadConfig() {
-  // We fetch payment info to show config hints
   const r = await fetch(`${API}/api/payment_info`);
   const j = await r.json();
   if(j.ok) {
     document.getElementById("cfgBkash").textContent = j.bkash;
     document.getElementById("cfgNagad").textContent = j.nagad;
   }
-  // These are hardcoded hints — actual values are in app.py
   document.getElementById("cfgMarkupMode").textContent = "See app.py";
   document.getElementById("cfgMarkupAmt").textContent  = "See app.py";
   document.getElementById("cfgMinPrice").textContent   = "See app.py";
   document.getElementById("cfgRate").textContent       = "See app.py";
+}
+
+// ════════════════════════════════════════════
+//  DIGITAL STORE ADMIN
+// ════════════════════════════════════════════
+async function loadStoreProducts() {
+  const r = await fetch(`${API}/admin/store/products`, {headers: authHeaders()});
+  const j = await r.json();
+  if (!j.ok) return;
+  document.getElementById("storeProductsBody").innerHTML = j.products.map(p => `
+    <tr>
+      <td>${p.name}</td>
+      <td>${p.category}</td>
+      <td style="color:var(--green);font-weight:600">₦${p.price}</td>
+      <td>${p.stock}</td>
+      <td>${p.is_active ? '<span class="badge badge-green">Active</span>' : '<span class="badge badge-red">Inactive</span>'}</td>
+      <td>
+        <button onclick="toggleProduct('${p.id}', ${!p.is_active})" 
+          style="background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:4px 10px;color:var(--text2);font-size:.7rem;cursor:pointer">
+          ${p.is_active ? 'Deactivate' : 'Activate'}
+        </button>
+        <button onclick="deleteProduct('${p.id}')" style="background:transparent;border:1px solid var(--red);border-radius:6px;padding:4px 10px;color:var(--red);font-size:.7rem;cursor:pointer">Delete</button>
+      </td>
+    </tr>
+  `).join("");
+}
+
+async function createProduct() {
+  const name = document.getElementById("prodName").value.trim();
+  const category = document.getElementById("prodCategory").value;
+  const price = parseFloat(document.getElementById("prodPrice").value);
+  const stock = parseInt(document.getElementById("prodStock").value) || 0;
+  const description = document.getElementById("prodDesc").value.trim();
+  const file_url = document.getElementById("prodFile").value.trim();
+  const keysRaw = document.getElementById("prodKeys").value.trim();
+  const license_keys = keysRaw ? keysRaw.split(",").map(k => k.trim()).filter(Boolean) : [];
+
+  if (!name || !price) {
+    setMsg("prodMsg", "Name and price required", "err");
+    return;
+  }
+
+  const r = await fetch(`${API}/admin/store/product`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify({ name, category, price, stock, description, file_url, license_keys })
+  });
+  const j = await r.json();
+  if (j.ok) {
+    setMsg("prodMsg", "✅ Product created!", "ok");
+    document.getElementById("prodName").value = "";
+    document.getElementById("prodPrice").value = "";
+    document.getElementById("prodStock").value = "";
+    document.getElementById("prodDesc").value = "";
+    document.getElementById("prodFile").value = "";
+    document.getElementById("prodKeys").value = "";
+    loadStoreProducts();
+  } else {
+    setMsg("prodMsg", j.error, "err");
+  }
+}
+
+async function toggleProduct(id, activate) {
+  const r = await fetch(`${API}/admin/store/product/${id}`, {
+    method: "PUT",
+    headers: authHeaders(),
+    body: JSON.stringify({ is_active: activate })
+  });
+  if (r.ok) loadStoreProducts();
+}
+
+async function deleteProduct(id) {
+  if (!confirm("Delete this product?")) return;
+  await fetch(`${API}/admin/store/product/${id}`, {
+    method: "DELETE",
+    headers: authHeaders()
+  });
+  loadStoreProducts();
 }
 </script>
 </body>
