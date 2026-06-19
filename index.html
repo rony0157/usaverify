@@ -239,6 +239,17 @@ footer a{color:var(--accent);text-decoration:none}
 .tab{flex:1;padding:9px;border-radius:8px;font-size:.82rem;font-weight:500;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text2);transition:all .2s;font-family:'DM Sans',sans-serif}
 .tab.active{background:var(--adim);border-color:var(--accent);color:var(--accent)}
 
+/* CHECKOUT */
+.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+.checkout-option{background:var(--bg3);border:2px solid var(--border2);border-radius:12px;padding:1.2rem;text-align:center;cursor:pointer;transition:all .2s}
+.checkout-option:hover{border-color:var(--accent)}
+.checkout-option.selected{border-color:var(--green);background:rgba(0,229,160,.05)}
+.checkout-option .icon{font-size:1.8rem;display:block;margin-bottom:.5rem}
+.checkout-option .label{font-size:.85rem;font-weight:600}
+.checkout-option .sub{font-size:.72rem;color:var(--text3)}
+.paystack-btn{background:#00b0f0;color:#fff;border:none;border-radius:9px;padding:13px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;transition:all .2s}
+.paystack-btn:hover{background:#0095d0}
+
 /* MOBILE */
 .mob-menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;padding:4px}
 @media(max-width:768px){
@@ -250,6 +261,7 @@ footer a{color:var(--accent);text-decoration:none}
   .mob-menu-btn{display:flex}
   .topup-grid,.pay-grid{grid-template-columns:1fr 1fr}
   .amount-grid{grid-template-columns:repeat(3,1fr)}
+  .checkout-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -301,7 +313,6 @@ footer a{color:var(--accent);text-decoration:none}
     <h2 class="stitle">300+ platforms supported</h2>
     <p class="ssub center">Search any service below. Live prices in Naira ₦.</p>
 
-    <!-- Search bar -->
     <div class="svc-search-wrap">
       <span class="svc-search-icon">🔍</span>
       <input type="text" class="svc-search-input" id="landSvcSearch" placeholder="Search WhatsApp, Google, TikTok..." oninput="filterLandingServices()">
@@ -382,6 +393,7 @@ footer a{color:var(--accent);text-decoration:none}
     </div>
     <button class="sn-item active" onclick="showAppPage('dashboard')" id="nav-dashboard"><span class="icon">📊</span>Dashboard</button>
     <button class="sn-item" onclick="showAppPage('verify')" id="nav-verify"><span class="icon">📱</span>Get Number</button>
+    <button class="sn-item" onclick="showAppPage('store')" id="nav-store"><span class="icon">🛍️</span>Digital Store</button>
     <button class="sn-item" onclick="showAppPage('orders')" id="nav-orders"><span class="icon">📋</span>My Orders</button>
     <button class="sn-item" onclick="showAppPage('topup')" id="nav-topup"><span class="icon">💰</span>Add Balance</button>
     <button class="sn-item" onclick="showAppPage('support')" id="nav-support"><span class="icon">💬</span>Support</button>
@@ -426,7 +438,6 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="app-page" id="ap-verify">
       <div class="app-page-title">📱 Get a US Number</div>
 
-      <!-- Search + Filter -->
       <div class="app-svc-search-wrap">
         <span class="app-svc-search-icon">🔍</span>
         <input type="text" class="app-svc-search" id="appSvcSearch" placeholder="Search WhatsApp, Google, TikTok, Discord..." oninput="filterAppServices()">
@@ -443,7 +454,6 @@ footer a{color:var(--accent);text-decoration:none}
         </div>
       </div>
 
-      <!-- ORDER PANEL -->
       <div class="order-panel" id="orderPanel" style="display:none">
         <div class="op-head">
           <h3 id="opTitle">Order</h3>
@@ -494,6 +504,67 @@ footer a{color:var(--accent);text-decoration:none}
               <button class="fbtn" style="background:transparent;border:1px solid var(--border2);color:var(--text2);margin-top:.5rem;font-size:.78rem" onclick="resetOrderPanel()">← Get Another Number</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIGITAL STORE -->
+    <div class="app-page" id="ap-store">
+      <div class="app-page-title">🛍️ Digital Store</div>
+      
+      <div class="app-svc-search-wrap">
+        <span class="app-svc-search-icon">🔍</span>
+        <input type="text" class="app-svc-search" id="storeSearch" placeholder="Search software, ebooks, templates..." oninput="filterStoreProducts()">
+      </div>
+      <div class="svc-results-count" id="storeCount">Loading products...</div>
+      <div class="app-svc-grid" id="storeGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text3)">
+          <div class="spinner" style="margin:0 auto .5rem"></div>Loading...
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal-overlay" id="checkoutModal">
+      <div class="modal" style="max-width:480px">
+        <div class="modal-head">
+          <h3 id="checkoutTitle">🛒 Checkout</h3>
+          <button class="close-x" onclick="closeModal('checkoutModal')">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="background:var(--bg3);border-radius:10px;padding:1rem;margin-bottom:1rem">
+            <div style="display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:.4rem">
+              <span style="color:var(--text2)">Product</span>
+              <span id="checkoutName" style="font-weight:600">–</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:.4rem">
+              <span style="color:var(--text2)">Price</span>
+              <span id="checkoutPrice" style="font-weight:700;color:var(--green)">–</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:.84rem">
+              <span style="color:var(--text2)">Your Balance</span>
+              <span id="checkoutBal" style="font-weight:600">–</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:1rem">
+            <div class="flabel">Select Payment Method</div>
+            <div class="checkout-grid">
+              <div class="checkout-option selected" id="pay-balance" onclick="selectCheckoutMethod('balance')">
+                <span class="icon">💰</span>
+                <div class="label">Pay with Balance</div>
+                <div class="sub">Use your wallet balance</div>
+              </div>
+              <div class="checkout-option" id="pay-paystack" onclick="selectCheckoutMethod('paystack')">
+                <span class="icon">💳</span>
+                <div class="label">Pay with Card</div>
+                <div class="sub">Paystack • Instant</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="fbtn" id="checkoutBtn" onclick="processCheckout()">🛒 Complete Purchase</button>
+          <div class="smsg" id="checkoutMsg"></div>
         </div>
       </div>
     </div>
@@ -700,6 +771,9 @@ const API = "https://usaverify-backend.onrender.com";
 let appUser=null, appOrders=[], services=[], ngRate=1600, supportInfo={whatsapp:"#",telegram:"#"};
 let currentTab="all", orderSt={service:"",serviceLabel:"",price:0,orderId:null,activationId:null,phone:null,pollTimer:null,countdownTimer:null,maxSecs:900,elapsed:0};
 let topupAmt=0;
+let storeProducts = [];
+let checkoutProductId = null;
+let checkoutMethod = "balance";
 
 // ── STORAGE ──
 function saveSession(t,u){localStorage.setItem("uv_token",t);localStorage.setItem("uv_user",JSON.stringify(u))}
@@ -901,12 +975,15 @@ async function doLogout(){
 function showAppPage(name){
   document.querySelectorAll(".app-page").forEach(p=>p.classList.remove("on"));
   document.querySelectorAll(".sn-item").forEach(n=>n.classList.remove("active"));
-  document.getElementById("ap-"+name).classList.add("on");
-  const nav=document.getElementById("nav-"+name);if(nav)nav.classList.add("active");
-  const titles={dashboard:"Dashboard",verify:"Get Number",orders:"My Orders",topup:"Add Balance",support:"Support",profile:"My Profile"};
-  if(name==="profile") loadProfile();
+  const page=document.getElementById("ap-"+name);
+  if(page)page.classList.add("on");
+  const nav=document.getElementById("nav-"+name);
+  if(nav)nav.classList.add("active");
+  const titles={dashboard:"Dashboard",verify:"Get Number",store:"Digital Store",orders:"My Orders",topup:"Add Balance",support:"Support",profile:"My Profile"};
   document.getElementById("appTopTitle").textContent=titles[name]||name;
   document.getElementById("appSidebar").classList.remove("mob-open");
+  if(name==="profile") loadProfile();
+  if(name==="store") loadStoreProducts();
 }
 function toggleMobSidebar(){document.getElementById("appSidebar").classList.toggle("mob-open")}
 
@@ -1049,6 +1126,130 @@ async function initCryptoPayment(){
   btnLoad("cryptoPayBtn",false,"₿ Pay with Binance Pay");
 }
 
+// ── DIGITAL STORE ──
+async function loadStoreProducts() {
+  try {
+    const r = await fetch(`${API}/api/store/products`);
+    const j = await r.json();
+    if (j.ok) {
+      storeProducts = j.products;
+      renderStoreProducts(storeProducts);
+    }
+  } catch(e) {
+    document.getElementById("storeGrid").innerHTML = `<div class="svc-no-res">⚠ Could not load products</div>`;
+  }
+}
+
+function renderStoreProducts(products) {
+  const grid = document.getElementById("storeGrid");
+  const count = document.getElementById("storeCount");
+  if (count) count.textContent = `Showing ${products.length} products`;
+  if (!products.length) {
+    grid.innerHTML = `<div class="svc-no-res">No products available</div>`;
+    return;
+  }
+  grid.innerHTML = products.map(p => `
+    <div class="app-svc-card" onclick="openCheckout('${p.id}')">
+      <div class="asc-icon">${p.category === 'software' ? '💻' : p.category === 'ebook' ? '📚' : '📦'}</div>
+      <div class="asc-name" title="${p.name}">${p.name}</div>
+      <div class="asc-price">₦${p.price.toLocaleString()}</div>
+      <div class="asc-badge">${p.stock > 0 ? '✓ In stock' : '❌ Out'}</div>
+    </div>
+  `).join("");
+}
+
+function filterStoreProducts() {
+  const q = document.getElementById("storeSearch").value.toLowerCase().trim();
+  const filtered = q ? storeProducts.filter(p => p.name.toLowerCase().includes(q)) : storeProducts;
+  renderStoreProducts(filtered);
+}
+
+// ── CHECKOUT ──
+function openCheckout(productId) {
+  const product = storeProducts.find(p => p.id === productId);
+  if (!product || product.stock <= 0) {
+    alert("This product is out of stock!");
+    return;
+  }
+  
+  checkoutProductId = productId;
+  checkoutMethod = "balance";
+  
+  document.getElementById("checkoutName").textContent = product.name;
+  document.getElementById("checkoutPrice").textContent = `₦${product.price.toLocaleString()}`;
+  document.getElementById("checkoutBal").textContent = `₦${(appUser?.balance||0).toLocaleString()}`;
+  
+  // Reset selection
+  document.querySelectorAll(".checkout-option").forEach(el => el.classList.remove("selected"));
+  document.getElementById("pay-balance").classList.add("selected");
+  
+  setMsg("checkoutMsg", "", "info");
+  openModal("checkoutModal");
+}
+
+function selectCheckoutMethod(method) {
+  checkoutMethod = method;
+  document.querySelectorAll(".checkout-option").forEach(el => el.classList.remove("selected"));
+  document.getElementById("pay-" + method).classList.add("selected");
+  setMsg("checkoutMsg", "", "info");
+}
+
+async function processCheckout() {
+  if (!checkoutProductId) return;
+  
+  const btn = document.getElementById("checkoutBtn");
+  btn.disabled = true;
+  btn.textContent = "⏳ Processing...";
+  setMsg("checkoutMsg", "Processing your order...", "info");
+  
+  try {
+    const r = await fetch(`${API}/api/store/checkout`, {
+      method: "POST",
+      headers: authH(),
+      body: JSON.stringify({
+        product_id: checkoutProductId,
+        payment_method: checkoutMethod
+      })
+    });
+    const j = await r.json();
+    
+    if (j.ok) {
+      if (j.payment_method === "paystack" && j.authorization_url) {
+        // Paystack payment — redirect to Paystack
+        setMsg("checkoutMsg", "Redirecting to Paystack...", "info");
+        window.open(j.authorization_url, "_blank");
+        closeModal("checkoutModal");
+      } else if (j.payment_method === "balance") {
+        // Balance payment — immediate delivery
+        let msg = `✅ ${j.message}\n\n`;
+        if (j.delivery?.license_key) {
+          msg += `🔑 License Key: ${j.delivery.license_key}\n`;
+        }
+        if (j.delivery?.file_url) {
+          msg += `📎 Download: ${j.delivery.file_url}\n`;
+        }
+        alert(msg);
+        appUser.balance = j.new_balance;
+        updateSidebar();
+        loadUserData();
+        loadStoreProducts();
+        closeModal("checkoutModal");
+      }
+    } else {
+      if (j.error.includes("Insufficient balance")) {
+        setMsg("checkoutMsg", `⚠️ ${j.error}. Please add balance or pay with card.`, "err");
+      } else {
+        setMsg("checkoutMsg", `❌ ${j.error}`, "err");
+      }
+    }
+  } catch(e) {
+    setMsg("checkoutMsg", "Connection error. Try again.", "err");
+  }
+  
+  btn.disabled = false;
+  btn.textContent = "🛒 Complete Purchase";
+}
+
 // ── INIT ──
 (async function(){
   await loadSupportInfo();
@@ -1078,7 +1279,6 @@ async function loadProfile(){
   const spent = appOrders.filter(o=>o.status!=="cancelled").reduce((s,o)=>s+(o.price_ngn||0),0);
   document.getElementById("profileSpent").textContent = "₦"+spent.toLocaleString();
 
-  // Load referral info
   try{
     const r=await fetch(`${API}/api/referral/info`,{headers:authH()}).then(r=>r.json());
     if(r.ok){
@@ -1122,25 +1322,6 @@ async function changePassword(){
     }else setMsg("pwdMsg",j.error,"err");
   }catch(e){setMsg("pwdMsg","Connection error","err")}
   btn.disabled=false;btn.textContent="🔒 Update Password";
-}
-
-// ── LOW BALANCE ALERT ──
-function checkLowBalance(){
-  if(!appUser) return;
-  const bal = appUser.balance||0;
-  const existing = document.getElementById("lowBalAlert");
-  if(bal < 500 && bal > 0){
-    if(!existing){
-      const alert = document.createElement("div");
-      alert.id = "lowBalAlert";
-      alert.style.cssText = "background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.25);border-radius:10px;padding:.8rem 1rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;font-size:.82rem;";
-      alert.innerHTML = `<span style="color:var(--red)">⚠️ Low balance! Add funds to continue verifying.</span><button onclick="showAppPage('topup')" style="background:var(--red);border:none;border-radius:6px;padding:5px 12px;color:#fff;font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;">Top Up</button>`;
-      const main = document.getElementById("ap-dashboard");
-      if(main) main.insertBefore(alert, main.firstChild.nextSibling);
-    }
-  } else if(existing){
-    existing.remove();
-  }
 }
 </script>
 </body>
