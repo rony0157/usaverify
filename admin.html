@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USAVerify — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07070d;--bg2:#0f0f18;--bg3:#181825;--card:#121220;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --accent:#7c5cfc;--adim:rgba(124,92,252,0.12);
+  --green:#00e5a0;--gdim:rgba(0,229,160,0.1);
+  --text:#eeeef5;--text2:#8888aa;--text3:#44445a;
+  --red:#ff4d6d;--yellow:#ffd166;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem}
+.login-card{background:var(--card);border:1px solid var(--border2);border-radius:18px;padding:2.5rem;width:100%;max-width:380px}
+.login-card h1{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:.3rem}
+.login-card p{font-size:.83rem;color:var(--text2);margin-bottom:1.5rem}
+.finput{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:11px 14px;color:var(--text);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;margin-bottom:.8rem}
+.finput:focus{border-color:var(--accent)}
+.fbtn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:9px;padding:13px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.fbtn:hover{background:#6444e8}
+.smsg{font-size:.8rem;margin-top:.5rem;min-height:16px}
+.smsg.err{color:var(--red)}.smsg.ok{color:var(--green)}
+
+/* ADMIN LAYOUT */
+#adminApp{display:none}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:220px;background:var(--bg2);border-right:1px solid var(--border);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:.3rem}
+.sidebar-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:1.2rem;padding:.5rem;color:var(--text);display:flex;align-items:center;gap:7px}
+.sidebar-logo span{color:var(--accent)}
+.nav-item{padding:9px 12px;border-radius:9px;cursor:pointer;font-size:.85rem;color:var(--text2);transition:all .2s;display:flex;align-items:center;gap:8px;border:none;background:transparent;width:100%;text-align:left;font-family:'DM Sans',sans-serif}
+.nav-item:hover{background:var(--bg3);color:var(--text)}
+.nav-item.active{background:var(--adim);color:var(--accent)}
+.main{margin-left:220px;padding:2rem;min-height:100vh}
+.page{display:none}.page.on{display:block}
+.page-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:1.5rem}
+
+/* STAT CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.2rem}
+.stat-label{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem}
+.stat-val{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:700}
+.stat-val.green{color:var(--green)}
+.stat-val.purple{color:var(--accent)}
+.stat-val.yellow{color:var(--yellow)}
+.stat-val.red{color:var(--red)}
+
+/* TABLES */
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:13px;overflow:hidden;margin-top:1rem}
+.table-head{padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.table-head h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700}
+.refresh-btn{background:var(--bg3);border:1px solid var(--border2);border-radius:7px;padding:6px 12px;color:var(--text2);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.refresh-btn:hover{color:var(--text)}
+table{width:100%;border-collapse:collapse}
+th{padding:10px 14px;text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);border-bottom:1px solid var(--border)}
+td{padding:11px 14px;font-size:.83rem;border-bottom:1px solid rgba(255,255,255,.04)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-size:.7rem;font-weight:600}
+.badge-green{background:rgba(0,229,160,.12);color:var(--green)}
+.badge-yellow{background:rgba(255,209,102,.12);color:var(--yellow)}
+.badge-red{background:rgba(255,77,109,.12);color:var(--red)}
+.badge-purple{background:var(--adim);color:var(--accent)}
+
+/* ADD BALANCE FORM */
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.5rem;max-width:440px}
+.form-card h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:1.2rem}
+.fgroup{margin-bottom:.9rem}
+.flabel{display:block;font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.form-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:11px 14px;color:var(--text);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--accent)}
+.submit-btn{background:var(--green);color:#000;border:none;border-radius:9px;padding:12px 24px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.submit-btn:hover{opacity:.85}
+
+/* DAISY BALANCE */
+.daisy-card{background:linear-gradient(135deg,rgba(0,229,160,.06),rgba(0,229,160,.02));border:1px solid rgba(0,229,160,.2);border-radius:13px;padding:1.5rem;max-width:320px;text-align:center;margin-bottom:1.5rem}
+.daisy-bal{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;color:var(--green)}
+.daisy-lbl{font-size:.75rem;color:var(--text3);margin-top:.3rem}
+
+/* SETTINGS */
+.settings-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.5rem;max-width:500px;margin-bottom:1rem}
+.settings-card h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:1.2rem}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;border-bottom:1px solid var(--border)}
+.setting-row:last-child{border-bottom:none}
+.setting-label{font-size:.85rem;color:var(--text2)}
+.setting-val{font-size:.85rem;font-weight:600;color:var(--text)}
+
+/* MOBILE */
+@media(max-width:700px){
+  .sidebar{width:100%;position:static;flex-direction:row;flex-wrap:wrap;padding:.8rem;gap:.4rem}
+  .main{margin-left:0;padding:1rem}
+  .sidebar-logo{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <h1>Admin Panel</h1>
+    <p>USAVerify — Reseller Dashboard</p>
+    <input type="password" class="finput" id="adminPwd" placeholder="Admin password">
+    <button class="fbtn" onclick="adminLogin()">Login</button>
+    <div class="smsg" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- ── ADMIN APP ── -->
+<div id="adminApp">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">⚡ <span>Admin</span></div>
+    <button class="nav-item active" onclick="showPage('dashboard')">📊 Dashboard</button>
+    <button class="nav-item" onclick="showPage('users')">👥 Users</button>
+    <button class="nav-item" onclick="showPage('orders')">📋 Orders</button>
+    <button class="nav-item" onclick="showPage('topup')">💰 Add Balance</button>
+    <button class="nav-item" onclick="showPage('settings')">⚙️ Settings</button>
+    <button class="nav-item" onclick="showPage('store')">🛍️ Store</button>
+    <div style="flex:1"></div>
+    <button class="nav-item" onclick="adminLogout()" style="color:var(--red)">🚪 Logout</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- DASHBOARD -->
+    <div class="page on" id="pg-dashboard">
+      <div class="page-title">Dashboard</div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-label">DaisySMS Balance</div>
+          <div class="stat-val green" id="daisyBal">...</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Users</div>
+          <div class="stat-val purple" id="totalUsers">...</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Orders</div>
+          <div class="stat-val yellow" id="totalOrders">...</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Revenue</div>
+          <div class="stat-val green" id="totalRevenue">...</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pending Orders</div>
+          <div class="stat-val yellow" id="pendingOrders">...</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Balance Held</div>
+          <div class="stat-val purple" id="totalBalHeld">...</div>
+        </div>
+      </div>
+
+      <!-- Recent orders -->
+      <div class="table-wrap">
+        <div class="table-head">
+          <h3>Recent Orders</h3>
+          <button class="refresh-btn" onclick="loadDashboard()">↻ Refresh</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr>
+              <th>Order ID</th><th>Email</th><th>Service</th>
+              <th>Phone</th><th>Price</th><th>Status</th><th>Time</th>
+            </tr></thead>
+            <tbody id="recentOrdersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="page" id="pg-users">
+      <div class="page-title">Users</div>
+      <div class="table-wrap">
+        
+  <div class="table-head">
+  <h3>All Users</h3>
+  <div style="display:flex;gap:6px;align-items:center">
+    <input type="text" id="userSearchInput" placeholder="Search email or name..."
+      style="background:var(--bg3);border:1px solid var(--border2);border-radius:7px;padding:6px 12px;color:var(--text);font-size:.78rem;outline:none;width:200px"
+      onkeydown="if(event.key==='Enter')searchUsers()">
+    <button class="refresh-btn" onclick="searchUsers()" style="background:var(--accent);color:#fff;border:none;padding:6px 14px">Search</button>
+    <button class="refresh-btn" onclick="loadUsers()">↻</button>
+  </div>
+</div>
+        
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr>
+              <th>Name</th><th>Email</th><th>Balance</th><th>Joined</th><th>Action</th>
+            </tr></thead>
+            <tbody id="usersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="page" id="pg-orders">
+      <div class="page-title">All Orders</div>
+      <div style="display:flex;gap:.8rem;margin-bottom:1rem;flex-wrap:wrap">
+        <button class="refresh-btn" style="padding:8px 16px" onclick="loadOrders('all')">All</button>
+        <button class="refresh-btn" style="padding:8px 16px" onclick="loadOrders('waiting')">⏳ Waiting</button>
+        <button class="refresh-btn" style="padding:8px 16px" onclick="loadOrders('received')">✅ Received</button>
+        <button class="refresh-btn" style="padding:8px 16px" onclick="loadOrders('cancelled')">❌ Cancelled</button>
+      </div>
+      <div class="table-wrap">
+        <div class="table-head">
+          <h3>Orders</h3>
+          <button class="refresh-btn" onclick="loadOrders('all')">↻ Refresh</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr>
+              <th>Order ID</th><th>Email</th><th>Service</th>
+              <th>Phone</th><th>Code</th><th>Price</th><th>Status</th><th>Time</th>
+            </tr></thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD BALANCE -->
+    <div class="page" id="pg-topup">
+      <div class="page-title">Add Balance to User</div>
+      <div class="form-card">
+        <h3>💰 Manual Balance Top-up</h3>
+        <p style="font-size:.82rem;color:var(--text2);margin-bottom:1.2rem">Bkash/Nagad payment confirm করার পর এখান থেকে user এর balance add করো।</p>
+        <div class="fgroup">
+          <label class="flabel">User Email</label>
+          <input type="email" class="form-input" id="topupEmail" placeholder="customer@email.com">
+        </div>
+        <div class="fgroup">
+          <label class="flabel">Amount (BDT ৳)</label>
+          <input type="number" class="form-input" id="topupAmount" placeholder="e.g. 100" min="1">
+        </div>
+        <div class="fgroup">
+          <label class="flabel">Note (optional)</label>
+          <input type="text" class="form-input" id="topupNote" placeholder="e.g. Bkash TxID 1234">
+        </div>
+        <button class="submit-btn" onclick="addBalance()">✓ Add Balance</button>
+        <div class="smsg" id="topupMsg" style="margin-top:.6rem"></div>
+      </div>
+
+      <div style="margin-top:2rem">
+        <h3 style="font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:1rem">Quick Add by Clicking User</h3>
+        <div class="table-wrap">
+          <div class="table-head"><h3>Users</h3><button class="refresh-btn" onclick="loadTopupUsers()">↻</button></div>
+          <div style="overflow-x:auto">
+            <table>
+              <thead><tr><th>Name</th><th>Email</th><th>Balance</th><th>Quick Add</th></tr></thead>
+              <tbody id="topupUsersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="page" id="pg-settings">
+      <div class="page-title">Settings Info</div>
+
+      <div class="daisy-card">
+        <div class="daisy-bal" id="settingsDaisyBal">...</div>
+        <div class="daisy-lbl">DaisySMS Balance (USD)</div>
+        <button class="refresh-btn" style="margin-top:.8rem" onclick="loadDaisyBal()">↻ Refresh</button>
+      </div>
+
+      <div class="settings-card">
+        <h3>⚙️ Current Configuration</h3>
+        <p style="font-size:.8rem;color:var(--text3);margin-bottom:1rem">এই settings change করতে Render.com এ গিয়ে Environment Variables update করো অথবা app.py এ directly change করো।</p>
+        <div class="setting-row">
+          <span class="setting-label">Markup Mode</span>
+          <span class="setting-val" id="cfgMarkupMode">–</span>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Markup Amount</span>
+          <span class="setting-val" id="cfgMarkupAmt">–</span>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Min Price (BDT)</span>
+          <span class="setting-val" id="cfgMinPrice">–</span>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">USD → BDT Rate</span>
+          <span class="setting-val" id="cfgRate">–</span>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Bkash Number</span>
+          <span class="setting-val" id="cfgBkash">–</span>
+        </div>
+        <div class="setting-row">
+          <span class="setting-label">Nagad Number</span>
+          <span class="setting-val" id="cfgNagad">–</span>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3>📝 How to Change Markup</h3>
+        <p style="font-size:.83rem;color:var(--text2);line-height:1.7">
+          <code style="background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--accent)">app.py</code> এর শুরুতে এই variables change করো:<br><br>
+          <code style="background:var(--bg3);padding:8px 12px;border-radius:7px;display:block;color:var(--green);margin:.5rem 0;font-size:.82rem;line-height:1.8">
+            MARKUP_MODE = "percent"  # বা "fixed"<br>
+            MARKUP_AMOUNT = 100  # 100% মানে double price<br>
+            MIN_PRICE_BDT = 25   # সর্বনিম্ন ৳25<br>
+            USD_TO_BDT = 110     # exchange rate
+          </code>
+          Change করার পর Render.com এ redeploy হবে automatically।
+        </p>
+      </div>
+      <div class="settings-card">
+        <h3>🤝 Referral Program</h3>
+        <p style="font-size:.8rem;color:var(--text3);margin-bottom:1rem">
+          Controls commission paid to a user when someone they referred makes a purchase (store or SMS verification). Changes apply immediately, no redeploy needed.
+        </p>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;background:var(--bg3);border-radius:8px;padding:.8rem">
+          <span style="font-size:.85rem;font-weight:600">Referral Program Enabled</span>
+          <label style="position:relative;display:inline-block;width:46px;height:24px">
+            <input type="checkbox" id="refEnabledToggle" style="opacity:0;width:0;height:0" onchange="saveReferralSettings()">
+            <span id="refToggleSlider" style="position:absolute;cursor:pointer;inset:0;background:var(--border2);border-radius:24px;transition:.2s"></span>
+          </label>
+        </div>
+        <div class="fgroup" style="margin-bottom:.8rem">
+          <label class="flabel">Commission Percent (%)</label>
+          <input type="number" class="finput" id="refCommissionPercent" min="0" max="100" step="0.5" placeholder="10">
+        </div>
+        <div class="fgroup" style="margin-bottom:1rem">
+          <label class="flabel">Per-Referred-User Lifetime Limit (₦)</label>
+          <input type="number" class="finput" id="refPerUserLimit" min="0" step="50" placeholder="500">
+          <div style="font-size:.72rem;color:var(--text3);margin-top:4px">Once a referrer earns this much from ONE referred user, that user's future purchases stop generating commission — other referrals keep earning normally.</div>
+        </div>
+        <button class="refresh-btn" style="background:var(--accent);border:none;color:#fff;padding:10px 20px;font-weight:600" onclick="saveReferralSettings()">💾 Save Referral Settings</button>
+        <div class="smsg" id="refSettingsMsg" style="margin-top:.6rem"></div>
+      </div>
+
+    </div>
+
+    <!-- STORE -->
+    <div class="page" id="pg-store">
+      <div class="page-title">🛍️ Digital Store</div>
+
+      <!-- Add Product Form -->
+      <div class="settings-card" style="margin-bottom:1.5rem">
+        <h3 id="productFormTitle">➕ Add New Product</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem">
+          <div>
+            <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Product Name</label>
+            <input type="text" id="prodName" placeholder="e.g. Premium eBook Bundle" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;">
+          </div>
+          <div>
+            <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Price (₦)</label>
+            <input type="number" id="prodPrice" placeholder="e.g. 2000" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem">
+          <div>
+            <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Category</label>
+            <select id="prodCategory" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;">
+              <option value="general">General</option>
+              <option value="ebook">eBook</option>
+              <option value="key">Activation Key</option>
+              <option value="software">Software</option>
+              <option value="course">Course</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Delivery Type</label>
+            <select id="prodType" onchange="toggleDeliveryFields()" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;">
+              <option value="pdf">PDF / Download Link</option>
+              <option value="key">Activation Key</option>
+              <option value="code">Code</option>
+              <option value="link">External Link</option>
+              <option value="other">Other (text content)</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:.8rem">
+          <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Description</label>
+          <textarea id="prodDesc" placeholder="Short product description shown to customers" rows="2" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;resize:vertical"></textarea>
+        </div>
+        <div id="deliveryUrlField" style="margin-bottom:.8rem">
+          <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Delivery URL (download/access link)</label>
+          <input type="text" id="prodDeliveryUrl" placeholder="https://..." style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;">
+        </div>
+        <div id="deliveryContentField" style="margin-bottom:.8rem;display:none">
+          <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Delivery Content (key/code/text — sent to customer)</label>
+          <textarea id="prodDeliveryContent" placeholder="e.g. ABCD-1234-EFGH-5678" rows="2" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;resize:vertical"></textarea>
+        </div>
+        <div style="margin-bottom:.8rem">
+          <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Instructions (optional, shown with delivery)</label>
+          <input type="text" id="prodInstructions" placeholder="e.g. Use this on the activation page" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;">
+        </div>
+        <div style="margin-bottom:1rem">
+          <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Thumbnail Image URL (optional)</label>
+          <input type="text" id="prodThumb" placeholder="https://..." style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;">
+        </div>
+        <button class="refresh-btn" id="saveProductBtn" onclick="saveProduct()" style="background:var(--green);color:#000;border:none;padding:10px 20px;font-weight:600">💾 Save Product</button>
+        <button class="refresh-btn" id="cancelEditBtn" onclick="resetProductForm()" style="display:none;margin-left:8px">✕ Cancel Edit</button>
+        <div class="smsg" id="productMsg" style="margin-top:.6rem"></div>
+      </div>
+
+      <!-- Products List -->
+      <div class="table-wrap" style="margin-bottom:1.5rem">
+        <div class="table-head">
+          <h3>All Products</h3>
+          <button class="refresh-btn" onclick="loadStoreProducts()">↻ Refresh</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Name</th><th>Category</th><th>Type</th><th>Price</th><th>In Stock</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="storeProductsBody"><tr><td colspan="7" style="text-align:center;color:var(--text3);padding:2rem">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Add Stock (Inventory) -->
+      <div class="settings-card" style="margin-bottom:1.5rem">
+        <h3>📦 Add Stock</h3>
+        <p style="font-size:.78rem;color:var(--text2);margin-bottom:.8rem">
+          Add multiple keys/links for a product here — each line = one unit. Each order claims one unique row, so no two customers ever get the same key.
+        </p>
+        <div style="margin-bottom:.8rem">
+          <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Product</label>
+          <select id="stockProductId" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;"></select>
+        </div>
+        <div style="margin-bottom:.8rem">
+          <label style="font-size:.78rem;color:var(--text2);display:block;margin-bottom:4px">Keys / Links (one per line)</label>
+          <textarea id="stockItems" placeholder="KEY-AAA-111
+KEY-BBB-222
+https://example.com/download/abc" rows="5" style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;resize:vertical;font-family:monospace"></textarea>
+        </div>
+        <button class="refresh-btn" id="addStockBtn" onclick="addStock()" style="background:var(--green);color:#000;border:none;padding:10px 20px;font-weight:600">📦 Add Stock</button>
+        <div class="smsg" id="stockMsg" style="margin-top:.6rem"></div>
+      </div>
+
+      <!-- Purchases List -->
+      <div class="table-wrap">
+        <div class="table-head">
+          <h3>Recent Purchases</h3>
+          <button class="refresh-btn" onclick="loadStorePurchases()">↻ Refresh</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Order ID</th><th>Email</th><th>Product</th><th>Price</th><th>Payment</th><th>Delivered</th><th>Date</th><th>Action</th></tr></thead>
+            <tbody id="storePurchasesBody"><tr><td colspan="8" style="text-align:center;color:var(--text3);padding:2rem">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    </div><!-- /main -->
+</div><!-- /adminApp -->
+
+<script>
+// ════════════════════════════════════════════
+//  CONFIG
+// ════════════════════════════════════════════
+const API = "https://usaverify-backend.onrender.com";  // ← same as index.html
+let adminPwd = "";
+
+// ════════════════════════════════════════════
+//  LOGIN
+// ════════════════════════════════════════════
+function adminLogin() {
+  const pwd = document.getElementById("adminPwd").value.trim();
+  if(!pwd) return;
+  adminPwd = pwd;
+
+  // Test with a protected endpoint
+  fetch(`${API}/admin/daisy_balance`, {
+    headers: { "X-Admin-Password": adminPwd }
+  })
+  .then(r => r.json())
+  .then(j => {
+    if(j.ok) {
+      document.getElementById("loginWrap").style.display = "none";
+      document.getElementById("adminApp").style.display  = "block";
+      loadDashboard();
+    } else {
+      document.getElementById("loginErr").textContent = "Wrong password!";
+      document.getElementById("loginErr").className   = "smsg err";
+    }
+  })
+  .catch(() => {
+    document.getElementById("loginErr").textContent = "Cannot connect to server.";
+    document.getElementById("loginErr").className   = "smsg err";
+  });
+}
+
+function adminLogout() {
+  adminPwd = "";
+  document.getElementById("loginWrap").style.display = "flex";
+  document.getElementById("adminApp").style.display  = "none";
+  document.getElementById("adminPwd").value = "";
+}
+
+document.getElementById("adminPwd").addEventListener("keydown", e => {
+  if(e.key === "Enter") adminLogin();
+});
+
+// ════════════════════════════════════════════
+//  NAVIGATION
+// ════════════════════════════════════════════
+function showPage(name) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("on"));
+  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+  document.getElementById("pg-"+name).classList.add("on");
+  event.currentTarget.classList.add("active");
+
+  if(name==="users")    loadUsers();
+  if(name==="orders")   loadOrders("all");
+  if(name==="topup")    loadTopupUsers();
+  if(name==="settings") { loadDaisyBal(); loadConfig(); loadReferralSettings(); }
+  if(name==="store")    { loadStoreProducts(); loadStorePurchases(); }
+}
+
+// ════════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════════
+function authHeaders() {
+  return { "Content-Type":"application/json", "X-Admin-Password": adminPwd };
+}
+
+function fmtDate(iso) {
+  if(!iso) return "–";
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-GB") + " " + d.toLocaleTimeString("en-GB", {hour:"2-digit",minute:"2-digit"});
+}
+
+function statusBadge(s) {
+  if(s==="received")  return `<span class="badge badge-green">✅ Received</span>`;
+  if(s==="waiting")   return `<span class="badge badge-yellow">⏳ Waiting</span>`;
+  if(s==="cancelled") return `<span class="badge badge-red">❌ Cancelled</span>`;
+  return `<span class="badge badge-purple">${s}</span>`;
+}
+
+function setMsg(id, text, type="ok") {
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.textContent = text;
+  el.className = "smsg " + type;
+}
+
+// ════════════════════════════════════════════
+//  DASHBOARD
+// ════════════════════════════════════════════
+async function loadDashboard() {
+  // DaisySMS balance
+  const db = await fetch(`${API}/admin/daisy_balance`, {headers: authHeaders()}).then(r=>r.json());
+  document.getElementById("daisyBal").textContent = db.ok ? "$"+parseFloat(db.daisy_balance_usd).toFixed(2) : "Error";
+
+  // Users + Orders
+  const [ur, or_] = await Promise.all([
+    fetch(`${API}/admin/users`,  {headers: authHeaders()}).then(r=>r.json()),
+    fetch(`${API}/admin/orders`, {headers: authHeaders()}).then(r=>r.json())
+  ]);
+
+  if(ur.ok) {
+    document.getElementById("totalUsers").textContent   = ur.users.length;
+    const totalBal = ur.users.reduce((s,u) => s+(u.balance||0), 0);
+    document.getElementById("totalBalHeld").textContent = "৳"+totalBal;
+  }
+
+  if(or_.ok) {
+    const orders = or_.orders;
+    document.getElementById("totalOrders").textContent = orders.length;
+    const revenue = orders.filter(o=>o.status!=="cancelled").reduce((s,o)=>s+(o.price_bdt||0),0);
+    document.getElementById("totalRevenue").textContent = "৳"+revenue;
+    const pending = orders.filter(o=>o.status==="waiting").length;
+    document.getElementById("pendingOrders").textContent = pending;
+
+    // Recent 10 orders
+    const recent = [...orders].sort((a,b) => new Date(b.created_at)-new Date(a.created_at)).slice(0,10);
+    document.getElementById("recentOrdersBody").innerHTML = recent.map(o => `
+      <tr>
+        <td style="font-family:monospace;font-size:.75rem;color:var(--text3)">${o.order_id||"–"}</td>
+        <td>${o.email}</td>
+        <td>${o.service}</td>
+        <td style="font-family:monospace">${o.phone||"–"}</td>
+        <td style="color:var(--green);font-weight:600">৳${o.price_bdt||0}</td>
+        <td>${statusBadge(o.status)}</td>
+        <td style="color:var(--text3);font-size:.75rem">${fmtDate(o.created_at)}</td>
+      </tr>
+    `).join("");
+  }
+}
+
+// ════════════════════════════════════════════
+//  USERS
+// ════════════════════════════════════════════
+let allUsers = [];
+
+async function loadUsers() {
+  const r = await fetch(`${API}/admin/users`, {headers: authHeaders()});
+  const j = await r.json();
+  if(!j.ok) return;
+  allUsers = j.users;
+  renderUsers(allUsers);
+}
+
+function searchUsers() {
+  const q = document.getElementById("userSearchInput").value.toLowerCase().trim();
+  if(!q){ renderUsers(allUsers); return; }
+  const filtered = allUsers.filter(u =>
+    u.email.toLowerCase().includes(q) ||
+    u.name.toLowerCase().includes(q)
+  );
+  renderUsers(filtered);
+}
+
+function renderUsers(users) {
+  document.getElementById("usersBody").innerHTML = users.map(u => `
+    <tr>
+      <td>${u.name}</td>
+      <td>${u.email}</td>
+      <td><span style="color:var(--green);font-weight:700">₦${u.balance||0}</span></td>
+      <td style="color:var(--text3);font-size:.75rem">${fmtDate(u.created_at)}</td>
+      <td>
+        <button onclick="quickTopup('${u.email}')"
+          style="background:var(--gdim);border:1px solid rgba(0,229,160,.2);border-radius:6px;padding:5px 10px;color:var(--green);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif">
+          + Add Balance
+        </button>
+      </td>
+    </tr>
+  `).join("") || `<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:1.5rem">No users found</td></tr>`;
+}
+
+function quickTopup(email) {
+  showPage("topup");
+  document.getElementById("topupEmail").value = email;
+  document.getElementById("topupAmount").focus();
+}
+
+// ════════════════════════════════════════════
+//  ORDERS
+// ════════════════════════════════════════════
+async function loadOrders(filter="all") {
+  const r = await fetch(`${API}/admin/orders`, {headers: authHeaders()});
+  const j = await r.json();
+  if(!j.ok) return;
+
+  let orders = j.orders;
+  if(filter !== "all") orders = orders.filter(o => o.status === filter);
+  orders.sort((a,b) => new Date(b.created_at)-new Date(a.created_at));
+
+  document.getElementById("ordersBody").innerHTML = orders.map(o => `
+    <tr>
+      <td style="font-family:monospace;font-size:.75rem;color:var(--text3)">${o.order_id||"–"}</td>
+      <td>${o.email}</td>
+      <td>${o.service}</td>
+      <td style="font-family:monospace">${o.phone||"–"}</td>
+      <td style="font-family:monospace;color:var(--green);font-weight:700">${o.sms_code||"–"}</td>
+      <td style="color:var(--green);font-weight:600">৳${o.price_bdt||0}</td>
+      <td>${statusBadge(o.status)}</td>
+      <td style="color:var(--text3);font-size:.75rem">${fmtDate(o.created_at)}</td>
+    </tr>
+  `).join("");
+}
+
+// ════════════════════════════════════════════
+//  ADD BALANCE
+// ════════════════════════════════════════════
+async function addBalance() {
+  const email  = document.getElementById("topupEmail").value.trim().toLowerCase();
+  const amount = parseInt(document.getElementById("topupAmount").value);
+  const note   = document.getElementById("topupNote").value.trim();
+
+  if(!email || !amount || amount < 1) {
+    setMsg("topupMsg","Email ও amount দাও","err"); return;
+  }
+
+  const r = await fetch(`${API}/admin/add_balance`, {
+    method:"POST",
+    headers: authHeaders(),
+    body: JSON.stringify({ email, amount, note })
+  });
+  const j = await r.json();
+
+  if(j.ok) {
+    setMsg("topupMsg", `✓ ${j.message} | New balance: ৳${j.new_balance}`, "ok");
+    document.getElementById("topupAmount").value = "";
+    document.getElementById("topupNote").value   = "";
+    loadTopupUsers();
+  } else {
+    setMsg("topupMsg", j.error || "Error", "err");
+  }
+}
+
+async function loadTopupUsers() {
+  const r = await fetch(`${API}/admin/users`, {headers: authHeaders()});
+  const j = await r.json();
+  if(!j.ok) return;
+  document.getElementById("topupUsersBody").innerHTML = j.users.map(u => `
+    <tr>
+      <td>${u.name}</td>
+      <td>${u.email}</td>
+      <td><span style="color:var(--green);font-weight:700">৳${u.balance||0}</span></td>
+      <td>
+        <button onclick="document.getElementById('topupEmail').value='${u.email}';document.getElementById('topupAmount').focus()"
+          style="background:var(--gdim);border:1px solid rgba(0,229,160,.2);border-radius:6px;padding:5px 10px;color:var(--green);font-size:.75rem;cursor:pointer;font-family:'DM Sans',sans-serif">
+          Select
+        </button>
+      </td>
+    </tr>
+  `).join("");
+}
+
+// ════════════════════════════════════════════
+//  SETTINGS / DAISY BAL
+// ════════════════════════════════════════════
+async function loadDaisyBal() {
+  const r = await fetch(`${API}/admin/daisy_balance`, {headers: authHeaders()});
+  const j = await r.json();
+  const val = j.ok ? "$"+parseFloat(j.daisy_balance_usd).toFixed(2) : "Error";
+  document.getElementById("settingsDaisyBal").textContent = val;
+}
+
+async function loadConfig() {
+  // We fetch payment info to show config hints
+  const r = await fetch(`${API}/api/payment_info`);
+  const j = await r.json();
+  if(j.ok) {
+    document.getElementById("cfgBkash").textContent = j.bkash;
+    document.getElementById("cfgNagad").textContent = j.nagad;
+  }
+  // These are hardcoded hints — actual values are in app.py
+  document.getElementById("cfgMarkupMode").textContent = "See app.py";
+  document.getElementById("cfgMarkupAmt").textContent  = "See app.py";
+  document.getElementById("cfgMinPrice").textContent   = "See app.py";
+  document.getElementById("cfgRate").textContent       = "See app.py";
+}
+
+function setToggleVisual(checked){
+  const slider = document.getElementById("refToggleSlider");
+  slider.style.background = checked ? "var(--green)" : "var(--border2)";
+  slider.style.setProperty("--knob-pos", checked ? "22px" : "2px");
+  slider.innerHTML = `<span style="position:absolute;height:18px;width:18px;left:${checked?'24px':'2px'};bottom:3px;background:white;border-radius:50%;transition:.2s"></span>`;
+}
+
+async function loadReferralSettings(){
+  try{
+    const r = await fetch(`${API}/admin/referral/settings`, {headers: authHeaders()});
+    const j = await r.json();
+    if(j.ok){
+      document.getElementById("refEnabledToggle").checked = j.settings.enabled;
+      setToggleVisual(j.settings.enabled);
+      document.getElementById("refCommissionPercent").value = j.settings.commission_percent;
+      document.getElementById("refPerUserLimit").value = j.settings.per_user_limit_ngn;
+    }
+  }catch(e){}
+}
+
+async function saveReferralSettings(){
+  const enabled = document.getElementById("refEnabledToggle").checked;
+  setToggleVisual(enabled);
+  const commission_percent = parseFloat(document.getElementById("refCommissionPercent").value);
+  const per_user_limit_ngn = parseFloat(document.getElementById("refPerUserLimit").value);
+  const msgEl = document.getElementById("refSettingsMsg");
+  msgEl.textContent = "Saving...";
+  msgEl.style.color = "var(--text3)";
+  try{
+    const r = await fetch(`${API}/admin/referral/settings`, {
+      method: "POST", headers: authHeaders(),
+      body: JSON.stringify({enabled, commission_percent, per_user_limit_ngn})
+    });
+    const j = await r.json();
+    if(j.ok){
+      msgEl.textContent = "✓ Saved";
+      msgEl.style.color = "var(--green)";
+      setTimeout(()=>{msgEl.textContent="";}, 2500);
+    }else{
+      msgEl.textContent = j.error || "Error saving";
+      msgEl.style.color = "var(--red)";
+    }
+  }catch(e){
+    msgEl.textContent = "Connection error";
+    msgEl.style.color = "var(--red)";
+  }
+}
+
+// ════════════════════════════════════════════
+//  DIGITAL STORE — Product & Purchase Management
+// ════════════════════════════════════════════
+let editingProductId = null;
+
+function toggleDeliveryFields() {
+  const type = document.getElementById("prodType").value;
+  const urlField     = document.getElementById("deliveryUrlField");
+  const contentField = document.getElementById("deliveryContentField");
+  if (type === "pdf" || type === "link") {
+    urlField.style.display     = "block";
+    contentField.style.display = "none";
+  } else {
+    urlField.style.display     = "none";
+    contentField.style.display = "block";
+  }
+}
+
+async function saveProduct() {
+  const name     = document.getElementById("prodName").value.trim();
+  const price    = parseFloat(document.getElementById("prodPrice").value);
+  const category = document.getElementById("prodCategory").value;
+  const type     = document.getElementById("prodType").value;
+  const desc     = document.getElementById("prodDesc").value.trim();
+  const delUrl   = document.getElementById("prodDeliveryUrl").value.trim();
+  const delContent = document.getElementById("prodDeliveryContent").value.trim();
+  const instr    = document.getElementById("prodInstructions").value.trim();
+  const thumb    = document.getElementById("prodThumb").value.trim();
+
+  if (!name || !price || price <= 0) {
+    setMsg("productMsg", "Name and a valid price are required", "err");
+    return;
+  }
+
+  const payload = {
+    name, price_ngn: price, category, product_type: type,
+    description: desc, delivery_url: delUrl, delivery_content: delContent,
+    instructions: instr, thumbnail_url: thumb
+  };
+
+  const btn = document.getElementById("saveProductBtn");
+  btn.disabled = true;
+  btn.textContent = "Saving...";
+
+  try {
+    let r, j;
+    if (editingProductId) {
+      r = await fetch(`${API}/admin/store/update_product/${editingProductId}`, {
+        method: "POST", headers: authHeaders(), body: JSON.stringify(payload)
+      });
+      j = await r.json();
+      if (j.ok) setMsg("productMsg", "✓ Product updated!", "ok");
+    } else {
+      r = await fetch(`${API}/admin/store/add_product`, {
+        method: "POST", headers: authHeaders(), body: JSON.stringify(payload)
+      });
+      j = await r.json();
+      if (j.ok) setMsg("productMsg", "✓ " + j.message, "ok");
+    }
+    if (j.ok) {
+      resetProductForm();
+      loadStoreProducts();
+    } else {
+      setMsg("productMsg", j.error || "Error saving product", "err");
+    }
+  } catch (e) {
+    setMsg("productMsg", "Connection error", "err");
+  }
+  btn.disabled = false;
+  btn.textContent = "💾 Save Product";
+}
+
+function resetProductForm() {
+  editingProductId = null;
+  document.getElementById("productFormTitle").textContent = "➕ Add New Product";
+  document.getElementById("prodName").value = "";
+  document.getElementById("prodPrice").value = "";
+  document.getElementById("prodCategory").value = "general";
+  document.getElementById("prodType").value = "pdf";
+  document.getElementById("prodDesc").value = "";
+  document.getElementById("prodDeliveryUrl").value = "";
+  document.getElementById("prodDeliveryContent").value = "";
+  document.getElementById("prodInstructions").value = "";
+  document.getElementById("prodThumb").value = "";
+  document.getElementById("cancelEditBtn").style.display = "none";
+  toggleDeliveryFields();
+  setMsg("productMsg", "", "ok");
+}
+
+function editProduct(p) {
+  editingProductId = p.product_id;
+  document.getElementById("productFormTitle").textContent = "✏️ Edit Product";
+  document.getElementById("prodName").value = p.name || "";
+  document.getElementById("prodPrice").value = p.price_ngn || "";
+  document.getElementById("prodCategory").value = p.category || "general";
+  document.getElementById("prodType").value = p.product_type || "pdf";
+  document.getElementById("prodDesc").value = p.description || "";
+  document.getElementById("prodDeliveryUrl").value = p.delivery_url || "";
+  document.getElementById("prodDeliveryContent").value = p.delivery_content || "";
+  document.getElementById("prodInstructions").value = p.instructions || "";
+  document.getElementById("prodThumb").value = p.thumbnail_url || "";
+  document.getElementById("cancelEditBtn").style.display = "inline-block";
+  toggleDeliveryFields();
+  document.getElementById("productFormTitle").scrollIntoView({ behavior: "smooth" });
+}
+
+async function toggleProductActive(productId, makeActive) {
+  const r = await fetch(`${API}/admin/store/update_product/${productId}`, {
+    method: "POST", headers: authHeaders(), body: JSON.stringify({ active: makeActive })
+  });
+  const j = await r.json();
+  if (j.ok) loadStoreProducts();
+  else alert(j.error || "Error");
+}
+
+async function loadStoreProducts() {
+  const r = await fetch(`${API}/admin/store/products`, { headers: authHeaders() });
+  const j = await r.json();
+  const body = document.getElementById("storeProductsBody");
+  if (!j.ok) {
+    body.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--red);padding:2rem">${j.error || "Error loading products"}</td></tr>`;
+    return;
+  }
+  if (!j.products.length) {
+    body.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:2rem">No products yet</td></tr>`;
+    return;
+  }
+  const typeLabels = {pdf:"PDF",key:"Key",code:"Code",link:"Link",other:"Other"};
+  body.innerHTML = j.products.map(p => `
+    <tr>
+      <td>${p.name}</td>
+      <td>${p.category}</td>
+      <td>${typeLabels[p.product_type] || p.category || "—"}</td>
+      <td style="color:var(--green);font-weight:700">₦${(p.price_ngn||0).toLocaleString()}</td>
+      <td style="font-weight:700;color:${(p.in_stock||0)>0 ? 'var(--green)' : 'var(--red)'}">${p.in_stock||0}</td>
+      <td>${p.active==="TRUE"||p.active===true ? '<span class="badge badge-green">Active</span>' : '<span class="badge badge-red">Inactive</span>'}</td>
+      <td>
+        <button onclick='editProduct(${JSON.stringify(p).replace(/'/g, "&apos;")})' style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--text);font-size:.75rem;cursor:pointer;margin-right:4px">✏️</button>
+        <button onclick="toggleProductActive('${p.product_id}', ${!(p.active==='TRUE'||p.active===true)})" style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:${(p.active==='TRUE'||p.active===true) ? 'var(--red)' : 'var(--green)'};font-size:.75rem;cursor:pointer">${(p.active==='TRUE'||p.active===true) ? '🚫' : '✓'}</button>
+      </td>
+    </tr>`).join("");
+
+  // keep the "Add Stock" product dropdown in sync
+  const sel = document.getElementById("stockProductId");
+  if (sel) {
+    const current = sel.value;
+    sel.innerHTML = j.products.map(p =>
+      `<option value="${p.product_id}">${p.name} (${p.in_stock||0} in stock)</option>`
+    ).join("");
+    if (current) sel.value = current;
+  }
+}
+
+async function addStock() {
+  const productId = document.getElementById("stockProductId").value;
+  const raw        = document.getElementById("stockItems").value;
+  const items       = raw.split("\n").map(s => s.trim()).filter(Boolean);
+
+  if (!productId) {
+    setMsg("stockMsg", "Select a product first", "err");
+    return;
+  }
+  if (!items.length) {
+    setMsg("stockMsg", "Paste at least one key/link", "err");
+    return;
+  }
+
+  const btn = document.getElementById("addStockBtn");
+  btn.disabled = true;
+  btn.textContent = "Adding...";
+
+  try {
+    const r = await fetch(`${API}/admin/store/add_inventory_bulk`, {
+      method: "POST", headers: authHeaders(),
+      body: JSON.stringify({ product_id: productId, items })
+    });
+    const j = await r.json();
+    if (j.ok) {
+      setMsg("stockMsg", `✓ Added ${j.added} item(s) to stock`, "ok");
+      document.getElementById("stockItems").value = "";
+      loadStoreProducts();
+    } else {
+      setMsg("stockMsg", j.error || "Error adding stock", "err");
+    }
+  } catch (e) {
+    setMsg("stockMsg", "Connection error", "err");
+  }
+  btn.disabled = false;
+  btn.textContent = "📦 Add Stock";
+}
+
+async function loadStorePurchases() {
+  const r = await fetch(`${API}/admin/store/purchases`, { headers: authHeaders() });
+  const j = await r.json();
+  const body = document.getElementById("storePurchasesBody");
+  if (!j.ok) {
+    body.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--red);padding:2rem">${j.error || "Error loading purchases"}</td></tr>`;
+    return;
+  }
+  if (!j.purchases.length) {
+    body.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:2rem">No purchases yet</td></tr>`;
+    return;
+  }
+  body.innerHTML = j.purchases.map(p => `
+    <tr>
+      <td style="font-family:monospace;font-size:.75rem;color:var(--text3)">${p.purchase_id}</td>
+      <td>${p.email}</td>
+      <td>${p.product_name}</td>
+      <td style="color:var(--green);font-weight:700">₦${(p.price_ngn||0).toLocaleString()}</td>
+      <td>${p.payment_method}</td>
+      <td>${p.delivered ? '<span class="badge badge-green">✅ Sent</span>' : '<span class="badge badge-yellow">⏳ Pending</span>'}</td>
+      <td style="color:var(--text3);font-size:.75rem">${fmtDate(p.created_at)}</td>
+      <td>
+        <button onclick="redeliverProduct('${p.purchase_id}')" style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--accent);font-size:.75rem;cursor:pointer">↻ Resend</button>
+      </td>
+    </tr>`).join("");
+}
+
+async function redeliverProduct(purchaseId) {
+  const r = await fetch(`${API}/admin/store/redeliver/${purchaseId}`, {
+    method: "POST", headers: authHeaders()
+  });
+  const j = await r.json();
+  alert(j.ok ? "✓ Redelivery initiated!" : (j.error || "Error"));
+}
+</script>
+</body>
+</html>
